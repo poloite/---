@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang = "ko"> 
+    <head>
+        <meta charset="UTF-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta nam="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>My First Web Page!</title> 
+    </head>
+    <body>
+        
+        <!--3.4 링크와 이미지 넣기-->
+        <!--링크는 문서와 문서 간 연결을 의미하며, 기본적으로 a태그를 사용한다. 사진과 같은 이미지 객체에 경우 img태그를 사용한다.-->
+        
+        <!--<a>태그는 HTML에서 내부나 외부 링크를 생성한다. 대상 경로를 의미하는 href 속성을 필수로 사용해야 하며 그 외는 target, title 속성을 선택해서 사용한다.-->
+        <!--href 속성은 a태그로 생성하는 링크의 대상 경로를 입력할 때 사용한다 속성값은 대상 경로의 주소(URL)이거나 내부 문서의 id속성값이다.-->
+        <!-- 대상 경로가 명확하지 않을 때는 속성값에 #을 넣으면 된다.-->
+        <!--target 속성은 a태그로 링크를 생성할 때 대상이 연결되는 방식을 지정한다. 여러 종류의 속성값이 있지만 새창으로 열리는 방식인 _blank를 제외하고 거의 사용x, target속성은 생략 가능하다.-->
+        <!--title속성은 링크를 설명할 수 있는 텍스트를 작성한다. title속성도 생략 가능하다.-->
+        <a href="https://www.gilbut.co.kr" target="_blank" title="도서출판 길벗">길벗 홈페이지</a>
+        
+        <!--img태그는 HTML문서에 이미지 객체를 삽입할 때 사용한다. src 속성과 alt속성으로 구성된다.-->
+        <!--src속성은 삽입하려는 이미지의 경로를 입력하는 속성이다. HTML에 이미지 경로는 항상 웹 브라우저에서 실행되는 HTML파일의 위치가 기준이다.-->
+        <!--src속성은 경로를 입력할 때 사용하는 기호(./(현재폴더),../(상위폴더))가 있다. 이미지가 제대로 나오지 않는다면 경로를 다시 한번 확인해보자-->
+        <!--alt속성은 이미지 객체를 설명하는 텍스트를 넣는다.-->
+        <img src="./FIFA.jpg" alt="피파 로고">
+        <!--이미지 링크는 a태그 안에 img태그를 사용하여 이미지를 클릭하여 특정 링크로 이동할 수 있다.-->
+        <a href="https://fconline.nexon.com/main/index" target="_blank" title="피파 홈페이지">
+            <img src="./FIFA.jpg" alt="피파 로고">
+        </a>
+        
+        <!--3.5 텍스트 강조하기-->
+        <!--텍스트에서 특정 내용을 강조하고 싶을 때 strong태그와 em태그를 사용한다.-->
+        
+        <!--strong태그는 텍스트의 의미에 강조하고 싶을 때 사용한다. storng태그는 중복해서 사용할 수 있다. -->
+        <p>이 시설은 <strong>관계자 외 출입금지</strong>입니다. </p>
+        
+        <!--em태그도 텍스트의 의미를 강조하고 싶을 때 사용한다. 사용하면 텍스트가 기울어져 보이면서 강조 효과를 낼 수 있다. em태그도 중첩해서 사용 가능-->
+        <p><em>여기서부터는 위험하니까 <em>절대로</em> 지나가지 마세요.</em></p>
+        
+        <!--3.6 폼 구성하기-->
+        <!--폼은 HTML에서 사용자와 상호작용해서 정보를 입력받고 서버로 전송하기 위한 양식을 의미한다.-->
+
+        <!--3.6.1 form태그-->
+        <!--form태그는 폼 양식을 의미하는 태그이다. HTML의 폼을 구성하는 태그는 모두 form태그 안에 작성한다. action, method속성을 같이 사용한다.-->
+        <!--action속성은 폼 요소에서 사용자의 상호작용으로 입력받은 값들을 전송할 서버의 URL 주소를 적는다.-->
+        <!--method속성은 입력받은 값을 서버에 전송할 때 송신 방식을 적습니다. 속성값으로 get 또는 post를 사용한다.-->
+        <!--일반적으로 폼 요소의 전송은 서버에서 처리하므로 서버 영역을 담당하는 개발자가 작성한다. 따라서 action 속성값은 #으로 입력하고
+            method속성값은 보안이 요구되는 정보라면 "post" 보안이 요구되는 정보가 아니라면 "get"으로 적는다. -->
+        <form action="서버 URL" method="get">폼을 구성하는 여러가지 태그들</form>
+
+        <!--3.6.2 input 태그-->
+        <!--input 태그는 로그인 페이지의 아이디와 비밀번호처럼 입력받는 요소를 생성할 때 사용한다. type,name,value속성이 있는데 type속성은 필수다.-->
+        <!--type 속성은 입력된 값에 따라 상호작용 요소의 종류를 결정합니다. 입력 요소는 아이디나 비밀번호를 입력받는 요소 외에도 콤보박스, 파일 업로드, 체크박스, 라디오버튼 등 다양하다.-->
+        <input type="text"> <!-- 한 줄 텍스트를 입력할 수 있는 요소를 생성한다.-->
+        <input type="password"> <!--비밀번호를 입력할 수 있는 요소를 생성한다.-->
+        <input type="tel"> <!--전화번호 형식을 입력할 수 있는 요소를 생성한다.-->
+        <input type="number"> <!--숫자만 입력할 수 있는 요소를 생성한다.-->
+        <input type="url"> <!--URL 주소 형식을 입력할 수 있는 요소를 생성한다.-->
+        <input type="search"> <!--검색용 텍스트를 입력할 수 있는 요소를 생성한다.-->
+        <input type="email"> <!--이메일 형식을 입력할 수 있는 요소를 생성한다.-->
+        <input type="checkbox"> <!--체크박스 요소를 생성한다.-->
+        <input type="radio"> <!--라디오버튼 요소를 생성한다.-->
+        <input type="file"> <!--파일 업로드 요소를 생성한다.-->
+        <input type="button"> <!--버튼 요소를 생성한다.-->
+        <input type="image"> <!--이미지로 버튼 요소를 생성한다. 따라서 img태그처럼 src 속성을 사용해야한다. 단 alt속성은 사용하지 않는다.-->
+        <input type="hidden"> <!--사용자 눈에 보이지 않는 입력 요소를 생성한다.-->
+        <input type="date"> <!--날짜(연,월,일)을 선택할 수 있는 입력요소를 생성한다.-->
+        <input type="datetime-local"> <!--사용자 시간대에 맞는 날짜(연,월,일,시,분)를 선택할 수 있는 입력 요소를 생성한다.-->
+        <input type="month"> <!--날짜(연,월)를 선택할 수 있는 입력 요소를 생성한다.-->
+        <input type="week"> <!--날짜(연,주차)를 선택할 수 있는 입력 요소를 생성한다.-->
+        <input type="time"> <!--시간을 선택할 수 있는 입력 요소를 생성한다.-->
+        <input type="range"> <!--숫자 범위를 선택할 수 있는 슬라이드 요소를 생성한다.-->
+        <input type="color"> <!--색상을 선택할 수 있는 요소를 생성한다.-->
+        <input type="submit"> <!--폼 전송 역활을 하는 버튼 요소를 생성한다.-->
+        <input type="reset"> <!--폼 요소에 사용자가 입력한 값을 초기화하는 버튼 요소를 생성한다.-->
+        <!--name속성은 입력 요소의 이름을 작성한다. 입력 요소가 form태그에 의해 서버로 전송될 때 name속성에 적힌 값이 이름으로 지정된다.-->
+        <!--value속성은 입력 요소의 초깃값을 작성한다, 입력 요소는 보통 사용자에게 수동적으로 입력받지만 상황에 따라 초깃값을 설정해야 한다.-->
+        <input type="search" name="검색" value="google 검색">
+
+        <!--3.6.3 label 태그-->
+        <!--label태그는 form태그 안에서 사용하는 상호작용 요소에 이름을 붙일 때 사용합니다. label 태그를 잘 사용하면 label 태그만 클릭해도 상호작용 요소를 선택할 수 있다.
+            웹 접근성 향상을 위해 무조건 사용하자. label태그는 암묵적인 방법과 명시적인 방법으로 구분된다.-->
+        <!--암묵적인 방법-->
+        <label> <!--암묵적인 방법은 label태그 안에 상호작용 요소를 포함하는 방식이다.-->
+            아이디
+            <input type="text"> <!--상호작용 요소-->
+        </label>
+        <!--명시적인 방법-->
+        <label for="userpw">비밀번호</label> <!--명시적인 방법은 label태그의 for속성과 상호작용 요소의 id속성을 같은 값으로 설정하는 방법이다.-->
+        <input type="password" id="userpw">
+        <!--예외적으로 암묵적인 방법과 명시적인 방법을 함께 사용할 수 있다.-->
+        <label for="username">
+            <input type="text" id="username">이름
+        </label>
+        
+        <!--3.6.4 fieldset와 legend 태그-->
+        <!--form태그 안에 사용된 다양한 상호작용 요소도 fieldset 태그를 사용해 그룹 지을 수 있다. fieldset태그로 그룹을 지으면 그룹별로 박스 모양의 테두리가 생긴다.-->
+        <!--이렇게 그룹을 지은 요소들은 legend태그로 이름을 붙일 수 있습니다.-->
+        <form>
+            <fieldset>
+                <legend>기본 정보</legend>
+                <p>
+                    <label for="userid">아이디</label>
+                    <input type="text" id="userid">
+                </p>
+                <p>
+                    <label for="passwd">비밀번호</label>
+                    <input type="password" id="passwd">
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>선택 정보</legend>
+               <p>
+                <label for="age">나이</label>
+                <input type="number" id="age">
+               </p>
+               <p>
+                <label for="recommender">추천인</label>
+                <input type="text" id="recommender">
+               </p>
+            </fieldset>
+        </form>
+
+        <!--3.6.5 textarea 태그-->
+        <!--여러 줄의 입력 요소를 생성할 때는 input태그가 아닌 textarea태그를 사용한다. 웹 사이트에서 글을 작성할 때 사용하는 입력요소는 textarea태그로 사용한다.-->
+        <!--textarea태그는 닫는 태그가 있다. input태그는 초깃값을 value속성으로 정의하지만 textarea태그로 생성한 여러 줄의 입력요소는 콘텐츠 영역에 초깃값을 정의한다.-->
+        <form action="#" method="post">
+            <fieldset>
+                <legend>블로그 글쓰기</legend>
+                <p>
+                    <label for="title">제목
+                        <input type="text" id="title" name="title">
+                    </label>
+                </p>
+                <p>
+                    <label for="desc">
+                        <textarea id="desc" name="desc"></textarea>
+                    </label>
+                </p>
+            </fieldset>
+        </form>
+        
+        <!--3.6.6 select, option, optgroup 태그-->
+        
+        <!--select 태그를 사용하면 콤보박스를 생성할 수 있습니다. 콤보박스에 항목 하나를 추가할 때는 option태그를 사용한다-->
+        <!--항목들을 그룹으로 묶고 싶다면 optgroup태그를 사용한다-->
+        <!--option태그는 서버에 전송할 값을 value속성으로 지정할 수 있는데 속성을 생략하면 option태그의 콘텐츠로 적은 텍스트 값으로 전송된다.-->
+        <!--optgroup태그로 항목들을 그룹 지을 때 반드시 label 속성으로 그룹명을 지정해야 한다.-->
+    <fieldset>
+        <legend>개인 정보 입력</legend>
+        
+            <label for="city">지역<br></label>
+        <select name="city" id="city">
+          <optgroup label="서울특별시">
+            <option value="강북구">강북구</option>
+            <option value="강남구">강남구</option>
+            <option value="서초구">서초구</option>
+          </optgroup>
+          <optgroup label="경기도 성남시">    
+            <option value="중원구">중원구</option>
+            <option value="분당구">분당구</option>
+          </optgroup>
+        
+        </select>
+    </fieldset>
+    <!--size속성은 콤보박스에서 화면에 노출되는 항목개수를 지정하는 속성입니다. 속성값으로 숫자를 적으면 되고, 생략할 경우 기본으로 1개 항목이 표시된다.-->
+    <select name="city" id="city" size="3">
+        <optgroup label="서울특별시">
+            <option value="강북구">강북구</option>
+            <option value="강남구">강남구</option>
+            <option value="서초구">서초구</option>
+          </optgroup>
+          <optgroup label="경기도 성남시">    
+            <option value="중원구">중원구</option>
+            <option value="분당구">분당구</option>
+          </optgroup>
+    </select>
+    <!--multiple속성은 콤보박스에서 여러 항목을 동시에 선택할 수 있게 해준다. ctrl을 누르고 있어야 여러 항목이 선택됨-->
+    <select name="city" id="city" multiple>
+        <optgroup label="서울특별시">
+            <option value="강북구">강북구</option>
+            <option value="강남구">강남구</option>
+            <option value="서초구">서초구</option>
+          </optgroup>
+          <optgroup label="경기도 성남시">    
+            <option value="중원구">중원구</option>
+            <option value="분당구">분당구</option>
+          </optgroup>
+    </select>
+    <!--selected속성은 원래 콤보박스는 첫 번째 option태그의 값이 기본 선택된 상태로 표시되는데 selected속성을 사용하면 기본 선택 항목을 변경할 수 있다.-->
+    <select name="city" id="city" size="5">
+          <optgroup label="경기도 성남시">    
+            <option value="중원구" >중원구</option>
+            <option value="분당구" >분당구</option>
+          </optgroup>
+        <optgroup label="서울특별시">
+            <option value="강북구">강북구</option>
+            <option value="강남구" selected>강남구</option>
+            <option value="서초구">서초구</option>
+        </optgroup>    
+    </select>
+
+    <!--3.6.7 button 태그-->
+    <!--input태그의 속성(submit,reset,button)으로 버튼 요소를 생성할 수 있지만 button태그로도 별도의 버튼 요소를 생성할 수 있다.-->
+    <!--button태그는 type속성이 따라와줘야한다. type속성값은 폼을 서버에 전송할 목적이면 submit,
+        상호작용 요소에 입력된 내용을 초기화하는 버튼이면 reset, 단순한 버튼이면 button으로 지정한다-->
+    <button type="submit">
+        <img src="FIFA.jpg" alt="피파 로고">
+        피파 홈페이지로 이동하기
+    </button>
+
+
+
+    </body>
+</html>    
