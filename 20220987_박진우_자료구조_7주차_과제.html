@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재귀 함수 문제 풀이</title>
+    <!-- 폰트 파일 경로: 여기어때잘난체.ttf를 같은 폴더에 넣으세요 -->
+    <style>
+        @font-face {
+            font-family: 'Yeogieoddaejalnanche';
+            src: url('../자료구조/Jalnan2TTF.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Yeogieoddaejalnanche', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* 배경 이미지 경로: background.jpg를 같은 폴더에 넣으세요 */
+            background-image: url('../자료구조/forest-7543646_1920.jpg');
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff9a3c;
+        }
+        
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(to right, #1a1a2e, #0f3460, #1a1a2e);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav button {
+            background: none;
+            border: none;
+            color: #e6e6e6;
+            cursor: pointer;
+            font-family: 'Yeogieoddaejalnanche', sans-serif;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav button:hover {
+            background-color: #ff9a3c;
+            color: #1a1a2e;
+        }
+        
+        .problem {
+            background-color: rgba(26, 26, 46, 0.9);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        .problem h2 {
+            color: #ff9a3c;
+            border-bottom: 2px solid #ff9a3c;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .problem-statement {
+            background-color: rgba(15, 52, 96, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .solution h3 {
+            color: #e94560;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        pre {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #16c79a;
+            font-family: monospace;
+        }
+        
+        .result {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #ff9a3c;
+            font-weight: bold;
+        }
+        
+        .memo-trace {
+            background-color: rgba(15, 52, 96, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .memo-trace h4 {
+            color: #e94560;
+            margin-top: 0;
+        }
+        
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>7주차 자료구조 과제 20220987 박진우</h1>
+        </header>
+        
+        <div class="nav-container">
+            <div class="nav">
+                <button onclick="showProblem(1)">문제 #1</button>
+                <button onclick="showProblem(2)">문제 #2</button>
+                <button onclick="showProblem(3)">문제 #3</button>
+                <button onclick="showProblem(4)">문제 #4</button>
+                <button onclick="showProblem(5)">문제 #5</button>
+                <button onclick="showProblem(6)">문제 #6</button>
+                <button onclick="showProblem(7)">문제 #7</button>
+                <button onclick="showProblem(8)">문제 #8</button>
+                <button onclick="showProblem(9)">문제 #9</button>
+                <button onclick="showProblem(10)">문제 #10</button>
+            </div>
+        </div>
+        
+        <!-- 문제 1 -->
+        <div id="problem1" class="problem active">
+            <h2>문제 #1: 셜록의 증거 데이터 처리 함수</h2>
+            <div class="problem-statement">
+                <p>셜록은 증거 데이터를 재귀적으로 처리하는 함수를 구현합니다.</p>
+                <p>함수 f(n)=3·f(n–1)–2, f(1)=4일 때, f(5)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def f(n):
+    if n == 1:
+        return 4
+    return 3 * f(n-1) - 2
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+f(5) = 3 * f(4) - 2
+f(4) = 3 * f(3) - 2
+f(3) = 3 * f(2) - 2
+f(2) = 3 * f(1) - 2 = 3 * 4 - 2 = 10
+f(3) = 3 * 10 - 2 = 28
+f(4) = 3 * 28 - 2 = 82
+f(5) = 3 * 82 - 2 = 244
+                </pre>
+                
+                <div class="result">결과: f(5) = 244</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def f_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 4
+        return 4
+    memo[n] = 3 * f_memo(n-1, memo) - 2
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>f_memo(1) 호출: memo[1] = 4 저장</p>
+                    <p>memo = {1: 4}</p>
+                    <p>f_memo(2) 계산: memo[2] = 3 * 4 - 2 = 10 저장</p>
+                    <p>memo = {1: 4, 2: 10}</p>
+                    <p>f_memo(3) 계산: memo[3] = 3 * 10 - 2 = 28 저장</p>
+                    <p>memo = {1: 4, 2: 10, 3: 28}</p>
+                    <p>f_memo(4) 계산: memo[4] = 3 * 28 - 2 = 82 저장</p>
+                    <p>memo = {1: 4, 2: 10, 3: 28, 4: 82}</p>
+                    <p>f_memo(5) 계산: memo[5] = 3 * 82 - 2 = 244 저장</p>
+                    <p>최종 memo = {1: 4, 2: 10, 3: 28, 4: 82, 5: 244}</p>
+                </div>
+                
+                <div class="result">결과: f(5) = 244</div>
+            </div>
+        </div>
+        
+        <!-- 문제 2 -->
+        <div id="problem2" class="problem">
+            <h2>문제 #2: 왓슨의 증거 조합 문제</h2>
+            <div class="problem-statement">
+                <p>왓슨은 증거 조합 문제를 재귀적으로 해결합니다.</p>
+                <p>점화식 T(n)=T(n–1)+2n, T(1)=2일 때, T(4)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def T(n):
+    if n == 1:
+        return 2
+    return T(n-1) + 2*n
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+T(4) = T(3) + 2*4 = T(3) + 8
+T(3) = T(2) + 2*3 = T(2) + 6
+T(2) = T(1) + 2*2 = 2 + 4 = 6
+T(3) = 6 + 6 = 12
+T(4) = 12 + 8 = 20
+                </pre>
+                
+                <div class="result">결과: T(4) = 20</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def T_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 2
+        return 2
+    memo[n] = T_memo(n-1, memo) + 2*n
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>T_memo(1) 호출: memo[1] = 2 저장</p>
+                    <p>memo = {1: 2}</p>
+                    <p>T_memo(2) 계산: memo[2] = 2 + 2*2 = 6 저장</p>
+                    <p>memo = {1: 2, 2: 6}</p>
+                    <p>T_memo(3) 계산: memo[3] = 6 + 2*3 = 12 저장</p>
+                    <p>memo = {1: 2, 2: 6, 3: 12}</p>
+                    <p>T_memo(4) 계산: memo[4] = 12 + 2*4 = 20 저장</p>
+                    <p>최종 memo = {1: 2, 2: 6, 3: 12, 4: 20}</p>
+                </div>
+                
+                <div class="result">결과: T(4) = 20</div>
+            </div>
+        </div>
+        
+        <!-- 문제 3 -->
+        <div id="problem3" class="problem">
+            <h2>문제 #3: 셜록의 서가 배열</h2>
+            <div class="problem-statement">
+                <p>셜록의 서가 배열 규칙은 다음과 같습니다:</p>
+                <p>1. 서가(n)은 서가(n-1)과 특별한 관계가 있습니다.</p>
+                <p>2. 서가(n)에 있는 책의 수를 B(n)이라고 할 때, B(n) = B(n-1) + B(n-2) + n입니다.</p>
+                <p>3. B(1) = 2, B(2) = 5입니다.</p>
+                <p>서가(5)에는 몇 권의 책이 있을까요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def B(n):
+    if n == 1:
+        return 2
+    if n == 2:
+        return 5
+    return B(n-1) + B(n-2) + n
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+B(5) = B(4) + B(3) + 5
+B(4) = B(3) + B(2) + 4
+B(3) = B(2) + B(1) + 3 = 5 + 2 + 3 = 10
+B(4) = 10 + 5 + 4 = 19
+B(5) = 19 + 10 + 5 = 34
+                </pre>
+                
+                <div class="result">결과: B(5) = 34</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def B_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 2
+        return 2
+    if n == 2:
+        memo[2] = 5
+        return 5
+    memo[n] = B_memo(n-1, memo) + B_memo(n-2, memo) + n
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>B_memo(1) 호출: memo[1] = 2 저장</p>
+                    <p>B_memo(2) 호출: memo[2] = 5 저장</p>
+                    <p>memo = {1: 2, 2: 5}</p>
+                    <p>B_memo(3) 계산: memo[3] = 5 + 2 + 3 = 10 저장</p>
+                    <p>memo = {1: 2, 2: 5, 3: 10}</p>
+                    <p>B_memo(4) 계산: memo[4] = 10 + 5 + 4 = 19 저장</p>
+                    <p>memo = {1: 2, 2: 5, 3: 10, 4: 19}</p>
+                    <p>B_memo(5) 계산: memo[5] = 19 + 10 + 5 = 34 저장</p>
+                    <p>최종 memo = {1: 2, 2: 5, 3: 10, 4: 19, 5: 34}</p>
+                </div>
+                
+                <div class="result">결과: B(5) = 34</div>
+            </div>
+        </div>
+        
+        <!-- 문제 4 -->
+        <div id="problem4" class="problem">
+            <h2>문제 #4: 런던 중앙 은행 금고 암호</h2>
+            <div class="problem-statement">
+                <p>런던 중앙 은행 금고를 열기 위한 암호화된 숫자 시퀀스. 숫자 시퀀스는 다음 규칙을 따릅니다:</p>
+                <p>1. S(1) = 2, S(2) = 6입니다.</p>
+                <p>2. n ≥ 3일 때, S(n) = 3*S(n-1) - S(n-2) + 1입니다.</p>
+                <p>S(6)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def S(n):
+    if n == 1:
+        return 2
+    if n == 2:
+        return 6
+    return 3*S(n-1) - S(n-2) + 1
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+S(3) = 3*S(2) - S(1) + 1 = 3*6 - 2 + 1 = 17
+S(4) = 3*S(3) - S(2) + 1 = 3*17 - 6 + 1 = 46
+S(5) = 3*S(4) - S(3) + 1 = 3*46 - 17 + 1 = 122
+S(6) = 3*S(5) - S(4) + 1 = 3*122 - 46 + 1 = 321
+                </pre>
+                
+                <div class="result">결과: S(6) = 321</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def S_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 2
+        return 2
+    if n == 2:
+        memo[2] = 6
+        return 6
+    memo[n] = 3*S_memo(n-1, memo) - S_memo(n-2, memo) + 1
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>S_memo(1) 호출: memo[1] = 2 저장</p>
+                    <p>S_memo(2) 호출: memo[2] = 6 저장</p>
+                    <p>memo = {1: 2, 2: 6}</p>
+                    <p>S_memo(3) 계산: memo[3] = 3*6 - 2 + 1 = 17 저장</p>
+                    <p>memo = {1: 2, 2: 6, 3: 17}</p>
+                    <p>S_memo(4) 계산: memo[4] = 3*17 - 6 + 1 = 46 저장</p>
+                    <p>memo = {1: 2, 2: 6, 3: 17, 4: 46}</p>
+                    <p>S_memo(5) 계산: memo[5] = 3*46 - 17 + 1 = 122 저장</p>
+                    <p>memo = {1: 2, 2: 6, 3: 17, 4: 46, 5: 122}</p>
+                    <p>S_memo(6) 계산: memo[6] = 3*122 - 46 + 1 = 321 저장</p>
+                    <p>최종 memo = {1: 2, 2: 6, 3: 17, 4: 46, 5: 122, 6: 321}</p>
+                </div>
+                
+                <div class="result">결과: S(6) = 321</div>
+            </div>
+        </div>
+        
+        <!-- 문제 5 -->
+        <div id="problem5" class="problem">
+            <h2>문제 #5: 런던 고대 건축물의 암호</h2>
+            <div class="problem-statement">
+                <p>런던의 고대 건축물에 숨겨진 암호. 건축물 패턴은 다음 규칙을 따릅니다:</p>
+                <p>1. A(1) = 4, A(2) = 10입니다.</p>
+                <p>2. n ≥ 3일 때, A(n) = 2*A(n-1) + A(n-2) - 6입니다.</p>
+                <p>A(5)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def A(n):
+    if n == 1:
+        return 4
+    if n == 2:
+        return 10
+    return 2*A(n-1) + A(n-2) - 6
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+A(3) = 2*A(2) + A(1) - 6 = 2*10 + 4 - 6 = 18
+A(4) = 2*A(3) + A(2) - 6 = 2*18 + 10 - 6 = 40
+A(5) = 2*A(4) + A(3) - 6 = 2*40 + 18 - 6 = 92
+                </pre>
+                
+                <div class="result">결과: A(5) = 92</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def A_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 4
+        return 4
+    if n == 2:
+        memo[2] = 10
+        return 10
+    memo[n] = 2*A_memo(n-1, memo) + A_memo(n-2, memo) - 6
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>A_memo(1) 호출: memo[1] = 4 저장</p>
+                    <p>A_memo(2) 호출: memo[2] = 10 저장</p>
+                    <p>memo = {1: 4, 2: 10}</p>
+                    <p>A_memo(3) 계산: memo[3] = 2*10 + 4 - 6 = 18 저장</p>
+                    <p>memo = {1: 4, 2: 10, 3: 18}</p>
+                    <p>A_memo(4) 계산: memo[4] = 2*18 + 10 - 6 = 40 저장</p>
+                    <p>memo = {1: 4, 2: 10, 3: 18, 4: 40}</p>
+                    <p>A_memo(5) 계산: memo[5] = 2*40 + 18 - 6 = 92 저장</p>
+                    <p>최종 memo = {1: 4, 2: 10, 3: 18, 4: 40, 5: 92}</p>
+                </div>
+                
+                <div class="result">결과: A(5) = 92</div>
+            </div>
+        </div>
+        
+        <!-- 문제 6 -->
+        <div id="problem6" class="problem">
+            <h2>문제 #6: 연쇄 살인범의 패턴</h2>
+            <div class="problem-statement">
+                <p>연쇄 살인범이 피해자를 선택하는 패턴을 분석하던 셜록은 재귀적 수열을 발견합니다. 이 패턴은 다음 규칙을 따릅니다:</p>
+                <p>1. V(1) = 1, V(2) = 3, V(3) = 7입니다.</p>
+                <p>2. n ≥ 4일 때, V(n) = V(n-1) + V(n-2) + V(n-3)입니다.</p>
+                <p>V(7)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def V(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 3
+    if n == 3:
+        return 7
+    return V(n-1) + V(n-2) + V(n-3)
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+V(4) = V(3) + V(2) + V(1) = 7 + 3 + 1 = 11
+V(5) = V(4) + V(3) + V(2) = 11 + 7 + 3 = 21
+V(6) = V(5) + V(4) + V(3) = 21 + 11 + 7 = 39
+V(7) = V(6) + V(5) + V(4) = 39 + 21 + 11 = 71
+                </pre>
+                
+                <div class="result">결과: V(7) = 71</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def V_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 1
+        return 1
+    if n == 2:
+        memo[2] = 3
+        return 3
+    if n == 3:
+        memo[3] = 7
+        return 7
+    memo[n] = V_memo(n-1, memo) + V_memo(n-2, memo) + V_memo(n-3, memo)
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>V_memo(1) 호출: memo[1] = 1 저장</p>
+                    <p>V_memo(2) 호출: memo[2] = 3 저장</p>
+                    <p>V_memo(3) 호출: memo[3] = 7 저장</p>
+                    <p>memo = {1: 1, 2: 3, 3: 7}</p>
+                    <p>V_memo(4) 계산: memo[4] = 7 + 3 + 1 = 11 저장</p>
+                    <p>memo = {1: 1, 2: 3, 3: 7, 4: 11}</p>
+                    <p>V_memo(5) 계산: memo[5] = 11 + 7 + 3 = 21 저장</p>
+                    <p>memo = {1: 1, 2: 3, 3: 7, 4: 11, 5: 21}</p>
+                    <p>V_memo(6) 계산: memo[6] = 21 + 11 + 7 = 39 저장</p>
+                    <p>memo = {1: 1, 2: 3, 3: 7, 4: 11, 5: 21, 6: 39}</p>
+                    <p>V_memo(7) 계산: memo[7] = 39 + 21 + 11 = 71 저장</p>
+                    <p>최종 memo = {1: 1, 2: 3, 3: 7, 4: 11, 5: 21, 6: 39, 7: 71}</p>
+                </div>
+                
+                <div class="result">결과: V(7) = 71</div>
+            </div>
+        </div>
+        
+        <!-- 문제 7 -->
+        <div id="problem7" class="problem">
+            <h2>문제 #7: 모리아티의 가면 컬렉션</h2>
+            <div class="problem-statement">
+                <p>모리아티의 저택에서 발견된 가면 컬렉션. 가면 배열 패턴은 다음 규칙을 따릅니다:</p>
+                <p>1. M(1) = 3, M(2) = 8입니다.</p>
+                <p>2. n ≥ 3일 때, M(n) = (M(n-1) * M(n-2)) / (M(n-2) - M(n-1) % M(n-2))입니다.</p>
+                <p>여기서 %는 나머지 연산을 의미합니다. M(4)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def M(n):
+    if n == 1:
+        return 3
+    if n == 2:
+        return 8
+    return (M(n-1) * M(n-2)) // (M(n-2) - M(n-1) % M(n-2))
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+M(3) = (M(2) * M(1)) // (M(1) - M(2) % M(1))
+     = (8 * 3) // (3 - 8 % 3)
+     = 24 // (3 - 2)
+     = 24 // 1
+     = 24
+
+M(4) = (M(3) * M(2)) // (M(2) - M(3) % M(2))
+     = (24 * 8) // (8 - 24 % 8)
+     = 192 // (8 - 0)
+     = 192 // 8
+     = 24
+                </pre>
+                
+                <div class="result">결과: M(4) = 24</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def M_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 3
+        return 3
+    if n == 2:
+        memo[2] = 8
+        return 8
+    memo[n] = (M_memo(n-1, memo) * M_memo(n-2, memo)) // (M_memo(n-2, memo) - M_memo(n-1, memo) % M_memo(n-2, memo))
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>M_memo(1) 호출: memo[1] = 3 저장</p>
+                    <p>M_memo(2) 호출: memo[2] = 8 저장</p>
+                    <p>memo = {1: 3, 2: 8}</p>
+                    <p>M_memo(3) 계산: memo[3] = (8 * 3) // (3 - 8 % 3) = 24 저장</p>
+                    <p>memo = {1: 3, 2: 8, 3: 24}</p>
+                    <p>M_memo(4) 계산: memo[4] = (24 * 8) // (8 - 24 % 8) = 24 저장</p>
+                    <p>최종 memo = {1: 3, 2: 8, 3: 24, 4: 24}</p>
+                </div>
+                
+                <div class="result">결과: M(4) = 24</div>
+            </div>
+        </div>
+        
+        <!-- 문제 8 -->
+        <div id="problem8" class="problem">
+            <h2>문제 #8: 런던 박물관의 고대 문서</h2>
+            <div class="problem-statement">
+                <p>런던 박물관에서 발견된 고대 문서. 문서의 숫자 시퀀스는 다음 규칙을 따릅니다:</p>
+                <p>1. D(1) = 3, D(2) = 4, D(3) = 6입니다.</p>
+                <p>2. n ≥ 4일 때, D(n) = D(n-1) * D(n-3) / D(n-2)입니다.</p>
+                <p>D(7)의 값은 얼마인가요?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def D(n):
+    if n == 1:
+        return 3
+    if n == 2:
+        return 4
+    if n == 3:
+        return 6
+    return D(n-1) * D(n-3) // D(n-2)
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+D(4) = D(3) * D(1) // D(2) = 6 * 3 // 4 = 18 // 4 = 4
+D(5) = D(4) * D(2) // D(3) = 4 * 4 // 6 = 16 // 6 = 2
+D(6) = D(5) * D(3) // D(4) = 2 * 6 // 4 = 12 // 4 = 3
+D(7) = D(6) * D(4) // D(5) = 3 * 4 // 2 = 12 // 2 = 6
+                </pre>
+                
+                <div class="result">결과: D(7) = 6</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def D_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1:
+        memo[1] = 3
+        return 3
+    if n == 2:
+        memo[2] = 4
+        return 4
+    if n == 3:
+        memo[3] = 6
+        return 6
+    memo[n] = D_memo(n-1, memo) * D_memo(n-3, memo) // D_memo(n-2, memo)
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>D_memo(1) 호출: memo[1] = 3 저장</p>
+                    <p>D_memo(2) 호출: memo[2] = 4 저장</p>
+                    <p>D_memo(3) 호출: memo[3] = 6 저장</p>
+                    <p>memo = {1: 3, 2: 4, 3: 6}</p>
+                    <p>D_memo(4) 계산: memo[4] = 6 * 3 // 4 = 4 저장</p>
+                    <p>memo = {1: 3, 2: 4, 3: 6, 4: 4}</p>
+                    <p>D_memo(5) 계산: memo[5] = 4 * 4 // 6 = 2 저장</p>
+                    <p>memo = {1: 3, 2: 4, 3: 6, 4: 4, 5: 2}</p>
+                    <p>D_memo(6) 계산: memo[6] = 2 * 6 // 4 = 3 저장</p>
+                    <p>memo = {1: 3, 2: 4, 3: 6, 4: 4, 5: 2, 6: 3}</p>
+                    <p>D_memo(7) 계산: memo[7] = 3 * 4 // 2 = 6 저장</p>
+                    <p>최종 memo = {1: 3, 2: 4, 3: 6, 4: 4, 5: 2, 6: 3, 7: 6}</p>
+                </div>
+                
+                <div class="result">결과: D(7) = 6</div>
+            </div>
+        </div>
+        
+        <!-- 문제 9 -->
+        <div id="problem9" class="problem">
+            <h2>문제 #9: 대영 도서관의 도서 도난 패턴</h2>
+            <div class="problem-statement">
+                <p>대영 도서관에서 귀중한 책들이 특정 패턴으로 사라지고 있습니다. 도둑은 다음 규칙에 따라 책을 훔칩니다:</p>
+                <p>1. f(1) = 1: 1권만 있으면 그 책을 훔칩니다</p>
+                <p>2. f(2) = 1: 2권 중 첫 번째 책을 훔칩니다</p>
+                <p>3. n ≥ 3일 때, f(n)은 (n-f(n-1))번째 책입니다.</p>
+                <p>10권의 책이 있는 경우, 도둑이 훔칠 책의 번호는 무엇입니까?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def f(n):
+    if n == 1 or n == 2:
+        return 1
+    return n - f(n-1)
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+f(3) = 3 - f(2) = 3 - 1 = 2
+f(4) = 4 - f(3) = 4 - 2 = 2
+f(5) = 5 - f(4) = 5 - 2 = 3
+f(6) = 6 - f(5) = 6 - 3 = 3
+f(7) = 7 - f(6) = 7 - 3 = 4
+f(8) = 8 - f(7) = 8 - 4 = 4
+f(9) = 9 - f(8) = 9 - 4 = 5
+f(10) = 10 - f(9) = 10 - 5 = 5
+                </pre>
+                
+                <div class="result">결과: f(10) = 5</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def f_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 1 or n == 2:
+        memo[n] = 1
+        return 1
+    memo[n] = n - f_memo(n-1, memo)
+    return memo[n]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>f_memo(1) 호출: memo[1] = 1 저장</p>
+                    <p>f_memo(2) 호출: memo[2] = 1 저장</p>
+                    <p>memo = {1: 1, 2: 1}</p>
+                    <p>f_memo(3) 계산: memo[3] = 3 - 1 = 2 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2}</p>
+                    <p>f_memo(4) 계산: memo[4] = 4 - 2 = 2 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2}</p>
+                    <p>f_memo(5) 계산: memo[5] = 5 - 2 = 3 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3}</p>
+                    <p>f_memo(6) 계산: memo[6] = 6 - 3 = 3 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3}</p>
+                    <p>f_memo(7) 계산: memo[7] = 7 - 3 = 4 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4}</p>
+                    <p>f_memo(8) 계산: memo[8] = 8 - 4 = 4 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4}</p>
+                    <p>f_memo(9) 계산: memo[9] = 9 - 4 = 5 저장</p>
+                    <p>memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4, 9: 5}</p>
+                    <p>f_memo(10) 계산: memo[10] = 10 - 5 = 5 저장</p>
+                    <p>최종 memo = {1: 1, 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4, 9: 5, 10: 5}</p>
+                </div>
+                
+                <div class="result">결과: f(10) = 5 (10권 중 5번째 책을 훔칩니다)</div>
+            </div>
+        </div>
+        
+        <!-- 문제 10 -->
+        <div id="problem10" class="problem">
+            <h2>문제 #10: 웨스트엔드 극장 살인 사건</h2>
+            <div class="problem-statement">
+                <p>웨스트엔드 극장에서 공연 중이던 배우가 실제로 살해되는 충격적인 사건. 셜록은 배우들의 위치 패턴을 분석하여 범인을 찾아야 합니다.</p>
+                <p>n명의 배우가 원형 무대에 서 있을 때, 서로 이웃하지 않게 k명을 선택하는 방법의 수를 T(n,k)라고 합니다. T(n,k)는 다음 재귀관계를 만족합니다:</p>
+                <p>1. T(n,0) = 1 (아무도 선택하지 않는 방법은 1가지)</p>
+                <p>2. T(n,1) = n (한 명을 선택하는 방법은 n가지)</p>
+                <p>3. n ≥ 4, k ≥ 2일 때, T(n,k) = T(n-2,k-1) + T(n-1,k)</p>
+                <p>T(7,3)의 값은 얼마입니까?</p>
+            </div>
+            
+            <div class="solution">
+                <h3>나이브 재귀 기법</h3>
+                <pre>
+def T(n, k):
+    if k == 0:
+        return 1
+    if k == 1:
+        return n
+    if n < 4 or k < 2:
+        return 0  # 조건 밖의 경우
+    return T(n-2, k-1) + T(n-1, k)
+                </pre>
+                
+                <p>계산 과정:</p>
+                <pre>
+T(7,3) = T(5,2) + T(6,3)
+
+T(5,2) = T(3,1) + T(4,2) = 3 + T(4,2)
+T(4,2) = T(2,1) + T(3,2) = 2 + 0 = 2
+T(5,2) = 3 + 2 = 5
+
+T(6,3) = T(4,2) + T(5,3) = 2 + T(5,3)
+T(5,3) = T(3,2) + T(4,3) = 0 + 0 = 0
+T(6,3) = 2 + 0 = 2
+
+T(7,3) = 5 + 2 = 7
+                </pre>
+                
+                <div class="result">결과: T(7,3) = 7</div>
+                
+                <h3>메모이제이션 기법</h3>
+                <pre>
+def T_memo(n, k, memo={}):
+    if (n, k) in memo:
+        return memo[(n, k)]
+    if k == 0:
+        memo[(n, 0)] = 1
+        return 1
+    if k == 1:
+        memo[(n, 1)] = n
+        return n
+    if n < 4 or k < 2:
+        memo[(n, k)] = 0
+        return 0
+    memo[(n, k)] = T_memo(n-2, k-1, memo) + T_memo(n-1, k, memo)
+    return memo[(n, k)]
+                </pre>
+                
+                <div class="memo-trace">
+                    <h4>메모 딕셔너리 변경 과정:</h4>
+                    <p>초기 memo = {}</p>
+                    <p>T_memo(7, 3) 호출, (7, 3)은 memo에 없음</p>
+                    <p>T_memo(5, 2) 호출, (5, 2)는 memo에 없음</p>
+                    <p>T_memo(3, 1) 호출: memo[(3, 1)] = 3 저장</p>
+                    <p>T_memo(4, 2) 호출, (4, 2)는 memo에 없음</p>
+                    <p>T_memo(2, 1) 호출: memo[(2, 1)] = 2 저장</p>
+                    <p>T_memo(3, 2) 호출: memo[(3, 2)] = 0 저장 (조건 밖)</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0}</p>
+                    <p>T_memo(4, 2) 계산: memo[(4, 2)] = 2 + 0 = 2 저장</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2}</p>
+                    <p>T_memo(5, 2) 계산: memo[(5, 2)] = 3 + 2 = 5 저장</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2, (5, 2): 5}</p>
+                    <p>T_memo(6, 3) 호출, (6, 3)은 memo에 없음</p>
+                    <p>T_memo(4, 2)는 이미 계산됨, 2 반환</p>
+                    <p>T_memo(5, 3) 호출, (5, 3)은 memo에 없음</p>
+                    <p>T_memo(3, 2)는 이미 계산됨, 0 반환</p>
+                    <p>T_memo(4, 3) 호출: memo[(4, 3)] = 0 저장 (조건 밖)</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2, (5, 2): 5, (4, 3): 0}</p>
+                    <p>T_memo(5, 3) 계산: memo[(5, 3)] = 0 + 0 = 0 저장</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2, (5, 2): 5, (4, 3): 0, (5, 3): 0}</p>
+                    <p>T_memo(6, 3) 계산: memo[(6, 3)] = 2 + 0 = 2 저장</p>
+                    <p>memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2, (5, 2): 5, (4, 3): 0, (5, 3): 0, (6, 3): 2}</p>
+                    <p>T_memo(7, 3) 계산: memo[(7, 3)] = 5 + 2 = 7 저장</p>
+                    <p>최종 memo = {(3, 1): 3, (2, 1): 2, (3, 2): 0, (4, 2): 2, (5, 2): 5, (4, 3): 0, (5, 3): 0, (6, 3): 2, (7, 3): 7}</p>
+                </div>
+                
+                <div class="result">결과: T(7,3) = 7</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showProblem(problemNum) {
+            // 모든 문제 숨기기
+            const problems = document.querySelectorAll('.problem');
+            problems.forEach(problem => {
+                problem.classList.remove('active');
+            });
+            
+            // 선택한 문제만 보이기
+            const selectedProblem = document.getElementById(`problem${problemNum}`);
+            selectedProblem.classList.add('active');
+            
+            // 스크롤 이동
+            selectedProblem.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
