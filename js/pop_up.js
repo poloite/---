@@ -16,6 +16,8 @@
     //window.close(); // 윈도우 닫기
 //}
 
+    
+
 function setCookie(name, value, expiredays) {
     var date = new Date();
     date.setDate(date.getDate() + expiredays);
@@ -47,7 +49,7 @@ function closePopup() {
     
 
 function pop_up() {
-    var cookie = getCookie("popupYN")
+    var cookieCheck = getCookie("popupYN")
     if (cookieCheck != "N"){
     window.open("../popup/popup.html", "팝업테스트", "width=400, height=300, top=10, left=10");
     }
