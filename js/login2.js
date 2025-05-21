@@ -15,7 +15,8 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-init();
+   checkAuth();
+   init_logined();
 });
 
 
