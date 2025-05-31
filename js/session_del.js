@@ -1,3 +1,36 @@
+// 쿠키 함수들을 직접 구현
+const getCookie = (name) => {
+    const cookie = document.cookie;
+    if (cookie != "") {
+        const cookie_array = cookie.split("; ");
+        for (const index in cookie_array) {
+            const cookie_name = cookie_array[index].split("=");
+            if (cookie_name[0] == name) {
+                return unescape(cookie_name[1]);
+            }
+        }
+    }
+    return "";
+};
+
+const setCookie = (name, value, expiredays) => {
+    const date = new Date();
+    date.setDate(date.getDate() + expiredays);
+    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
+};
+
+const logout_count = () => {
+    console.log('logout_count 함수 실행됨');
+    const cookieValue = getCookie("logout_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("logout_cnt", newCount.toString(), 30);
+    
+    console.log("로그아웃 횟수:", newCount);
+    alert("로그아웃 횟수: " + newCount + "회");
+};
+
 function session_del() {//세션 삭제
         if (sessionStorage) {
             sessionStorage.removeItem("Session_Storage_id");
@@ -9,10 +42,11 @@ function session_del() {//세션 삭제
         }
     }
 
+
 const check = () => {
     const logoutForm = document.getElementById('logout_form');
     const logoutBtn = document.getElementById('logout_btn');
-
+        logout_count();
         session_del(); // 세션 삭제
       
     logoutForm.submit();

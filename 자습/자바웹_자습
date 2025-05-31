@@ -61,17 +61,20 @@
 ; 4주차 연습문제
 
 ; 검색 창 search.js를 수정하여 직접 실행해본다.
-; • 자바스크립트의 클릭 이벤트 식별자 수정하기
-;   현재 식별자의 값은? ("search_btn")
-;   식별자 값을 search_button_msg 로 수정한다.
-;   document.getElementById("search_button_msg").addEventListener('click',search_message);
 
-; Index.html의 버튼 클릭 id 식별자를 수정한다.
+; • 자바스크립트의 클릭 이벤트 식별자 수정하기
+;   현재 식별자의 값은?  A) ("search_btn")
+
+;   식별자 값을 search_button_msg 로 수정한다.
+;   A) document.getElementById("search_button_msg").addEventListener('click',search_message);
+
+;• Index.html의 버튼 클릭 id 식별자를 수정한다.
+
 ; • 수정된 식별자 값과 일치해야 한다.
-; <button class="btn btn-outline-success" id = "search_button_msg" type="submit">검색하기</button>
+; A) <button class="btn btn-outline-success" id = "search_button_msg" type="submit">검색하기</button>
 
 ;  함수 search_message()를 2개 이상 추가한다.
-;  function search_message(){
+;A)  function search_message(){
 ;     let a = "검색을 수행합니다.";
 ;     alert(a);
 ; }
@@ -260,6 +263,187 @@
 ; 9. 값 비교에 ===는 무엇을 더 검사하는가?  A) ==는 값만 비교하고 ===는 값과 데이터 타입을 추가로 비교한다.
 
 
-;
+;응용 문제 풀기 
+
+로그인 입력 길이 제한 (아래의 코드를 login.js에 추가한다.)
+• 이메일 10글자 이하, 패스워드 15글자 이하 수정
+   
+   하지만 이메일은 도메인까지 포함해서 10글자 이하가 될 수도 있겠지만 대부분 10글자 이상이 될 수밖에 없다. 그래서 방법이 두 가지가 있는데 그냥 단순하게 글자 갯수만 올리면 되겠지만 
+   @부터 끝까지 인식하지 못하게 하여 아이디 부분만 10글자 이하로 조건을 걸어 구현을 해봤다.
+
+A)    if (!emailValue.includes('@')) {
+        alert('올바른 이메일 형식이 아닙니다.');
+        return false;
+    }
+    
+    // 로컬 파트(@ 앞부분)만 추출하여 길이 검사
+    const localPart = emailValue.split('@')[0]; @를 기준으로 앞 뒤로 배열을 생성하여 첫 번째 인덱스(아이디 부분)을 localPart에 저장한다.
+    if (localPart.length > 10) {
+        alert('이메일의 @ 앞부분은 10글자 이하로 입력해야 합니다.');
+        return false;
+    }
+    
+    if (localPart.length < 3) {
+        alert('이메일의 @ 앞부분은 최소 3글자 이상 입력해야 합니다.');
+        return false;
+    }
+    
+      if (passwordValue.length > 15) {
+         alert('비밀번호는 15글자 이하로 입력해야 합니다.');
+        return false;
+      }
+
+• 로그인 입력 제한(패턴식 활용) (아래의 코드들을 login.js에 추가한다.)
+ 1. 3글자 이상 반복 입력 x
+   A)  // 3글자 이상 반복 입력 검사 (이메일)
+      const repeatedPattern = /(.{3,})\1/;   {3,} - 수량자로 바로 앞의 패턴이 3번 이상 반복되어야 함을 의미한다.
+                                             \1 - 백레퍼런스(backreference)로 첫 번째 캡처 그룹에서 매칭된 내용과 동일한 텍스트를 다시 찾는 역활을 해준다.
+      if (repeatedPattern.test(emailValue)) {
+         alert('이메일에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+         return false;
+      }
+      
+      // 3글자 이상 반복 입력 검사 (패스워드)
+      if (repeatedPattern.test(passwordValue)) {
+         alert('패스워드에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+         return false;
+      }
+ 2. 연속되는 숫자 2개 이상 반복 입력 x
+   A) // 연속되는 숫자 2개 이상 반복 검사 (이메일)
+      const consecutiveNumbers = /(\d{2,})/g; \d - 숫자 문자(0-9)를 의미하는 메타문자입니다. [0-9]와 동일한 의미한다.
+                                              -{2,} - 수량자(quantifier)로, 바로 앞의 패턴이 2번 이상 반복되어야 함을 의미한다.
+                                              - g - 전역 플래그(global flag)로, 문자열에서 첫 번째 매치만 찾는 것이 아니라 모든 매치를 찾는 역활을 해준다.
+      const emailMatches = emailValue.match(consecutiveNumbers);
+      if (emailMatches) {
+         for (let match of emailMatches) {
+               const regex = new RegExp(match.replace(/\d/g, '\\d'), 'g');
+               const occurrences = (emailValue.match(regex) || []).length;
+               if (occurrences > 1) {
+                  alert('이메일에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+                  return false;
+               }
+         }
+      }
+      
+      // 연속되는 숫자 2개 이상 반복 검사 (패스워드)
+      const passwordMatches = passwordValue.match(consecutiveNumbers); 
+      if (passwordMatches) {
+         for (let match of passwordMatches) {
+               const regex = new RegExp(match.replace(/\d/g, '\\d'), 'g');
+               const occurrences = (passwordValue.match(regex) || []).length;
+               if (occurrences > 1) {
+                  alert('패스워드에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+                  return false;
+               }
+         }
+      }
 
 
+
+<!-- 10주차 -->
+
+1. 쿠키 파트 응용 문제 (login.js에 추가한다.)
+
+• 로그인 login_count() 함수, 쿠키 이름 : login_cnt 
+
+A)
+const login_count = () => {
+    const cookieValue = getCookie("login_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("login_cnt", newCount.toString(), 30);
+    
+    console.log("로그인 횟수:", newCount);
+    alert("로그인 횟수: " + newCount + "회");
+};
+
+그리고 check_input 함수 마지막 부분에 login_count();를 추가한다. 그 이유는 로그인 과정을 마친 뒤 마지막에 횟수를 추가하기 위해서이다.
+
+
+• 로그아웃 logout_count() 함수, 쿠키 이름 : logout_cnt 
+
+A)
+const logout_count = () => {
+    const cookieValue = getCookie("logout_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("logout_cnt", newCount.toString(), 30);
+    
+    console.log("로그아웃 횟수:", newCount);
+    alert("로그아웃 횟수: " + newCount + "회");
+};
+
+그리고 전역 변수 함수로 등록을 해서 다른 파일에서도 login_count, logout_count 함수를 사용할 수 있도록 구현한다.
+// 8. 전역 함수 등록 (session_del에 사용할 수 있도록 전역 변수로 등록했다.)
+export { login_count, logout_count };
+
+그리고 아래의 코드들은은 로그아웃 시에 시행되야 되기 때문에 로그아웃 기능이 구현되어 있는 js파일인 session_del.js에 추가한다.
+
+import { logout_count } from './login.js'; //이 코드는 login.js에서 전역 함수로 등록한 logout_count함수를 사용하기 위해서 추가했다.
+
+const check = () => {
+    const logoutForm = document.getElementById('logout_form');
+    const logoutBtn = document.getElementById('logout_btn');
+        logout_count(); //로그아웃 횟수
+        session_del(); // 세션 삭제
+      
+    logoutForm.submit();
+}   
+
+그리고 주의할 점은 logout.html에서 아래의 코드로 수정한다.
+<script type="module" defer src="../js/session_del.js" defer></script>
+
+하지만 이러면 logout.html에서 session_del.js를 로드할 때 login.js에서 임포트한 session.js의 session_check() 함수가 실행되어 
+로그아웃 페이지로 갈 때 "이미 로그인 되었습니다."라고 메세지가 뜨면서 index_login.html파일로 다시 돌아간다. 따라서 session.js에서 아래의 코드로 수정해야 한다.
+
+export function session_check() { 
+    // 현재 페이지가 로그아웃 페이지인 경우 세션 체크 생략
+    if (window.location.pathname.includes('logout.html')) {  //이 부분을 추가하여 로그아웃 페이지일 때는 session_check함수가 실행이 안되도록 설정한다.
+        return;
+    }
+
+    //세션 검사
+    if (sessionStorage.getItem("Session_Storage_id")) {
+        alert("이미 로그인 되었습니다.");
+        location.href='../login/index_login.html'; // 로그인된 페이지로 이동
+    }
+}
+
+!!위의 처럼 구현하고 싶었으나 로그아웃 페이지에서 로그아웃 버튼을 클릭했을 때 오류메세지도 안뜨고 아무 반응이 없어서 아래의 코드로 수정하였다.
+아예 모든 함수를 session_del.js에 구현하였다.
+
+import { logout_count } from './login.js'; // 이 코드는 삭제한다.
+// 쿠키 함수들을 직접 구현
+const getCookie = (name) => {
+    const cookie = document.cookie;
+    if (cookie != "") {
+        const cookie_array = cookie.split("; ");
+        for (const index in cookie_array) {
+            const cookie_name = cookie_array[index].split("=");
+            if (cookie_name[0] == name) {
+                return unescape(cookie_name[1]);
+            }
+        }
+    }
+    return "";
+};
+
+const setCookie = (name, value, expiredays) => {
+    const date = new Date();
+    date.setDate(date.getDate() + expiredays);
+    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
+};
+
+const logout_count = () => {
+    console.log('logout_count 함수 실행됨');
+    const cookieValue = getCookie("logout_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("logout_cnt", newCount.toString(), 30);
+    
+    console.log("로그아웃 횟수:", newCount);
+    alert("로그아웃 횟수: " + newCount + "회");
+};

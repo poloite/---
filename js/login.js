@@ -65,6 +65,17 @@ function getCookie(name) {
           return ;
 }
 
+const login_count = () => {
+    const cookieValue = getCookie("login_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("login_cnt", newCount.toString(), 30);
+    
+    console.log("로그인 횟수:", newCount);
+    alert("로그인 횟수: " + newCount + "회");
+};
+
 const check_input = () => {
     const loginForm = document.getElementById('login_form');
     const loginBtn = document.getElementById('login_btn');
@@ -100,14 +111,76 @@ const check_input = () => {
         return false;
      }
 
+          // @ 기호 존재 여부 확인
+    if (!emailValue.includes('@')) {
+        alert('올바른 이메일 형식이 아닙니다.');
+        return false;
+    }
+    
+    // 로컬 파트(@ 앞부분)만 추출하여 길이 검사
+    const localPart = emailValue.split('@')[0];
+    if (localPart.length > 10) {
+        alert('이메일의 @ 앞부분은 10글자 이하로 입력해야 합니다.');
+        return false;
+    }
+    
+    if (localPart.length < 3) {
+        alert('이메일의 @ 앞부분은 최소 3글자 이상 입력해야 합니다.');
+        return false;
+    }
+      if (passwordValue.length > 15) {
+         alert('비밀번호는 15글자 이하로 입력해야 합니다.');
+        return false;
+      }
+
      if (emailValue.length < 5) {
          alert('아이디는 최소 5글자 이상 입력해야 합니다.');
          return false;
       }
      
-      if (passwordValue.length < 12) {
-         alert('비밀번호는 반드시 12글자 이상 입력해야 합니다.');
+      if (passwordValue.length < 10) {
+         alert('비밀번호는 반드시 10글자 이상 입력해야 합니다.');
          return false;
+      }
+
+      // 3글자 이상 반복 입력 검사 (이메일)
+      const repeatedPattern = /(.{3,})\1/;
+      if (repeatedPattern.test(emailValue)) {
+         alert('이메일에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+         return false;
+      }
+      
+      // 3글자 이상 반복 입력 검사 (패스워드)
+      if (repeatedPattern.test(passwordValue)) {
+         alert('패스워드에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+         return false;
+      }
+      
+      // 연속되는 숫자 2개 이상 반복 검사 (이메일)
+      const consecutiveNumbers = /(\d{2,})/g;
+      const emailMatches = emailValue.match(consecutiveNumbers);
+      if (emailMatches) {
+         for (let match of emailMatches) {
+               const regex = new RegExp(match.replace(/\d/g, '\\d'), 'g');
+               const occurrences = (emailValue.match(regex) || []).length;
+               if (occurrences > 1) {
+                  alert('이메일에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+                  return false;
+               }
+         }
+      }
+      
+      // 연속되는 숫자 2개 이상 반복 검사 (패스워드)
+      const passwordMatches = passwordValue.match(consecutiveNumbers);
+      if (passwordMatches) {
+         for (let match of passwordMatches) {
+               const regex = new RegExp(match.replace(/\d/g, '\\d'), 'g');
+               const occurrences = (passwordValue.match(regex) || []).length;
+               if (occurrences > 1) {
+                  alert('패스워드에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+                  return false;
+               }
+         }
       }
       
       const hasSpecialChar = passwordValue.match(/[!,@#$%^&*()_+\- =\[\]{};':"\\|,.<>\/?]+/) !== null;
@@ -144,6 +217,9 @@ const check_input = () => {
       }
 
 
+      // 로그인 횟수 증가 (모든 검증이 통과한 후)
+       login_count();
+ 
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
     
@@ -152,3 +228,5 @@ const check_input = () => {
     loginForm.submit();
 };
 document.getElementById("login_btn").addEventListener('click', check_input);
+
+export { login_count, logout_count };
