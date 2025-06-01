@@ -7,8 +7,8 @@
 ## 📖 목차
 
 - [3주차 - 메타데이터와 하이퍼링크]
-- [4주차 - 자바스크립트 기초-1]
-- [5주차 - 자바스크립트 기초-2]
+- [4주차 - JavaScript 기초-1]
+- [5주차 - JavaScript 기초-2]
 - [6주차 - FORM을 통한 데이터 전송]
 - [9주차 - 입력필터링 및 데이터 저장장]
 - [10주차 - 쿠키와 세션션]
@@ -31,7 +31,7 @@
 | **4. 이미지 삽입** | `<img src="이미지 파일 경로">` |
 | **5. 밑줄** | `<hr>` |
 |**6. 문장 정렬**|`style="display: flex; justify-content: center;"`|
-|**설명:** `display: flex`를 통해 flexbox 컨테이너로 지정하고 `justify-content: center`로 flex 아이템들을 가운데로 정렬하는 역할을 합니다.|
+|**설명:** `display: flex`를 통해 flexbox 컨테이너로 지정하고 `justify-content: center`로 flex 아이템들을 가운데로 정렬하는 역할을 한다.|
 |**7. 문장 크기**|`<h1>` ~ `<h6>` 또는 font size|
 
 ### 🛠️ 3주차 연습문제
@@ -49,10 +49,10 @@
 **적용 방법:** 위의 코드를 아래와 같이 추가<br>
 `<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">`
 
-**결과:** 배경은 파란색이며, 어두운 테마이기 때문에 글씨의 색깔은 흰색입니다.
+**결과:** 배경은 파란색이며, 어두운 테마이기 때문에 글씨의 색깔은 흰색이다.
 
 ### 3️⃣ 테이블에 색상 추가하기
-**설명:** 테이블의 색상은 테이블 전체에 색상을 추가할 수도 있고, 행과 셀에 각각 추가할 수도 있습니다.
+**설명:** 테이블의 색상은 테이블 전체에 색상을 추가할 수도 있고, 행과 셀에 각각 추가할 수도 있다.
 
 **적용한 방법:** 테이블 전체에 색상을 추가<br>
 `<table class="table caption-top table-primary" border="5">`
@@ -60,14 +60,14 @@
 
 
 ---
-## 🎯 4주차 - 자바스크립트 기초-1
+## 🎯 4주차 - JavaScript 기초-1
 
 ### 💡 지난주 내용 살펴보기
 
 
 | 질문 | 답변 |
 |------|------|
-| **`<meta>` 태그의 추가 위치는?** | `<meta>`태그는 `<head>`태그에 추가합니다. |
+| **`<meta>` 태그의 추가 위치는?** | `<meta>`태그는 `<head>`태그에 추가한다. |
 | **하이퍼링크** | `<a href="파일 경로">` |
 | **기본 레이아웃 영역을 무엇이라 하는가?** | 테이블 | 
 |**🔗 Link와 하이퍼링크의 차이점**| **Link 태그:** `<head>`태그에 추가하고 외부 자원(CSS)을 추가할 때 사용 |
@@ -80,7 +80,7 @@
 
 `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>`
 
-**구성:** `<link>`, `<meta>`, `<script>` 태그가 추가되었습니다.
+**구성:** `<link>`, `<meta>`, `<script>` 태그를 추가하였다.
 
 #### 🎨 디자인 관련
 
@@ -124,8 +124,8 @@ function search_message(){
 }
 
 **실험 결과:**
-- ❓ **같은 이름의 함수가 중첩하면 에러가 나는가?** → 에러는 나지 않습니다.
-- ❓ **실행하는 경우 어떤 함수가 우선 순위가 높은가?** → "아래에 쓴 검색을 수행한다."가 출력됩니다.
+- ❓ **같은 이름의 함수가 중첩하면 에러가 나는가?** → 에러는 나지 않는다.
+- ❓ **실행하는 경우 어떤 함수가 우선 순위가 높은가?** → "아래에 쓴 검색을 수행한다."가 출력된다.
 
 #### 📝 함수 search_message()에 변수 추가
 
@@ -143,14 +143,14 @@ function search_message(){
 
 
 ---
-## 🎯 5주차 - JavaScript 기초
+## 🎯 5주차 - JavaScript 기초 -2
 
 ### 💡 지난주 내용 살펴보기
 
 | 질문 | 답변 |
 |------|------|
 | **자바스크립트를 추가하는 태그는?** | `<script>`태그 |
-| **파일로 작성된 자바스크립트는 어디에 추가되는가?** | `<script>`태그로 html 문서에 추가됩니다. |
+| **파일로 작성된 자바스크립트는 어디에 추가되는가?** | `<script>`태그로 html 문서에 추가된다. |
 | **자바스크립트가 제어하는 트리구조 문서를 무엇이라 하는가?** | DOM(Document Object Model) |
 
 #### 🔧 변수 선언 방식
@@ -222,3 +222,129 @@ function googleSearch() {
 **구글 검색 연동**
 - `encodeURIComponent()` 함수로 UTF-8 인코딩 처리
 - `window.open()` 메서드로 새 창에서 구글 검색 실행
+
+
+
+---
+## 🎯 6주차 - FORM을 통한 데이터 전송
+
+### 💡 지난주 내용 살펴보기
+
+#### 📊 JavaScript 데이터 타입
+
+| 질문 | 답변 |
+|------|------|
+| **JS의 참조 데이터 타입은? 2개 이상** | 객체, 배열, 함수, 자료구조(MAP, SET) |
+| **Undefined 데이터 타입의 특징은?** | Undefined는 원시 타입으로 선언 후 값을 할당하지 않은 변수를 말합니다. 그리고 반드시 값을 직접 확인해야 한다. |
+| **문자열과 변수를 조합하여 출력하는 방법을 무엇이라 하는가?** | 템플릿 리터럴 |
+
+#### 🌐 HTTP 전송 방식
+
+| 질문 | 답변 |
+|------|------|
+| **Get / post 2가지 전송방식의 핵심 차이점은?** | Get방식은 URL에 정보가 노출되어 보안이 취약하고 Post방식은 URL에 정보가 노출되지 않아 보안에 용이하다. |
+| **페이지 요청에 Utf-8 인코딩 처리 전용 함수는?** | `encodeURIComponent` 함수이다. |
+
+#### ⚙️ JavaScript 기능
+
+| 질문 | 답변 |
+|------|------|
+| **페이지 로딩과 동시에 js를 호출하는 속성은?** | `defer` 속성이다. |
+| **상대경로를 지정하는 경우 상위 폴더를 지정하는 방법은?** | `../`를 사용한다. |
+| **자바스크립트의 핵심 타이머 함수는?** | `setTimeout` 함수 |
+
+### 🛠️ 6주차 응용 문제
+
+#### 📄 login 폴더에 logout.html 파일 작성
+
+**요구사항:**
+- 기존 login.html 전체 소스코드를 가져온다
+- Head 및 body부터 footer 등 기본 소스 코드를 유지한다
+- 로그아웃 화면으로 수정한다
+- 로그아웃 버튼 기능: 클릭하면 index.html로 연결한다
+
+**구현 과정:**
+login.html의 전체 소스코드를 가져와서 logout.html에 필요한 스크립트를 제외한 나머지를 주석처리 하거나 삭제했다.<br>
+그리고 원래의 로그인 버튼을 제외한 이메일과 비밀번호 입력창등의 기능들은 삭제했다.
+
+**문제점 및 해결:**
+하지만 이 로그아웃 기능은 10주차까지 잘 실행되지 않았다. 그 이유는 `logout_form`과 `logout_btn`이라는 변수가 선언되지 않았고 로그아웃 기능을 하는 함수가 선언되지 않았기 때문이다.<br>
+(로그아웃 페이지를 처음 만든 시기가 9주차에서 10주차 사이일 때 만들었다.)<br>
+따라서 11주차에 교수님의 솔루션을 받아 `session_del.js`라는 자바스크립트 파일을 따로 만들어서 로그아웃 기능과 세션을 삭제하는 기능을 하는 코드를 만들었다.
+
+#### 💻 logout.html 코드
+
+`<!DOCTYPE html>`
+
+`<html lang="ko">`
+
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+         <link rel="stylesheet" href="../css/login.css">
+         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>;         
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.5/purify.min.js" integrity="sha512-/CUtA84sWWqWEBejNrrtWa7Yc4cth3Ome2ymvCKOo9YcZ4sh98tndUy4LutE2xGcAgD4fyz16y+gSyJdGCB5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <!-- <script type="text/javascript" defer src="../js/session.js" defer></script> -->
+          <script type="text/javascript" defer src="../js/session_del.js" defer></script>
+          <!-- <script type="text/javascript" defer src="../js/login.js" defer></script> -->
+     
+     <body>
+         <section class="vh-100 gradient-custom">
+             <div class="container py-5 h-100">
+                 <div class="row d-flex justify-content-center align-items-center h-100">
+                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                         <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                             <div class="card-body p-5 text-center">
+                                 <div class="mb-md-5 mt-md-4 pb-5">
+                                     <form id="logout_form" method="get" action="../Web_main 20220987/Index.html"> 
+                                        <h2 class="fw-bold mb-2 text-uppercase">로그아웃 메인화면</h2>
+                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" id="logout_btn" type="button">로그아웃</button> //타입을 button이라 하지 않으면 자바 스크립트를 실행하지 않고 그냥 form을 실행시킨다.
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>           
+         </section>
+     </body>
+
+`</html>` 
+
+
+#### 📝 session_del.js 코드
+
+function session_del() {
+
+    if (sessionStorage) {
+        sessionStorage.removeItem("Session_Storage_id");
+        sessionStorage.removeItem("Session_Storage_pass");
+        alert('로그아웃 버튼 클릭 확인 : 세션 스토리지를 삭제합니다.');
+    } 
+    else {
+        alert("세션 스토리지 지원 x");
+    }
+
+}
+
+const check = () => {
+
+    const logoutForm = document.getElementById('logout_form');
+    const logoutBtn = document.getElementById('logout_btn');
+    session_del(); // 세션 삭제
+    logoutForm.submit();
+
+}    
+
+document.getElementById("logout_btn").addEventListener('click', check);
+
+#### 🔧 중요한 구현 포인트
+- session_del.js를 logout_html에 연동하기.
+- 정확한 ID명(logout_btn)를 logout.html에 `<form>`에 입력하기
+
+
+
+### 🛠️ 6주차 연습문제
+#### 📋 JS 및 HTML 정리하기
+- 완료 사항: 들여쓰기 및 head 태그에 자바스크립트 정리 완료
