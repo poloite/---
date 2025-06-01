@@ -110,13 +110,17 @@
 #### 🔄 함수 search_message()를 2개 이상 추가
 
 function search_message(){
+
     let a = "검색을 수행합니다.";
     alert(a);
+
 }
 
 function search_message(){
+
     let a = "검색을 수행한다.";
     alert(a);
+
 }
 
 **실험 결과:**
@@ -130,8 +134,10 @@ function search_message(){
 - 변수를 출력하는 형태로 수정
 
 function search_message(){
+
     let a = "검색을 수행합니다.";
     alert(a);
+
 }
 
 
@@ -169,12 +175,15 @@ function search_message(){
 **검사할 항목:** 공백, 비속어 5개
 
 function search_message(){
+
     let a = "검색을 수행합니다.";
     alert(a);
     alert("공백과 비속어를 검사합니다.");
+
 }
 
 function googleSearch() {
+    
     const searchTerm = document.getElementById("search_input").value; // 검색어로 설정
     const forbiddenWords = ["바보", "멍청이", "욕1", "욕2", "욕3"]; //배열로 비속어 목록 만들기
 
@@ -196,6 +205,7 @@ function googleSearch() {
     // 새 창에서 구글 검색을 수행
     window.open(googleSearchUrl, "_blank"); // 새로운 창에서 열기.
     return false;
+
 }
 
 #### 📝 구현 설명
