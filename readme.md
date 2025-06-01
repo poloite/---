@@ -10,10 +10,10 @@
 - [4주차 - JavaScript 기초-1]
 - [5주차 - JavaScript 기초-2]
 - [6주차 - FORM을 통한 데이터 전송]
-- [9주차 - 입력필터링 및 데이터 저장장]
-- [10주차 - 쿠키와 세션션]
-- [11주차 - 암호화와 보안 토큰큰]
-- [12주차 - 모듈화 및 클래스스]
+- [9주차 - 입력필터링 및 데이터 저장]
+- [10주차 - 쿠키와 세션]
+- [11주차 - 암호화와 보안 토큰]
+- [12주차 - 모듈화 및 클래스]
 - [13주차 - 웹 오픈 API]
 
 
@@ -348,3 +348,158 @@ document.getElementById("logout_btn").addEventListener('click', check);
 ### 🛠️ 6주차 연습문제
 #### 📋 JS 및 HTML 정리하기
 - 완료 사항: 들여쓰기 및 head 태그에 자바스크립트 정리 완료
+
+
+
+---
+## 🎯 9주차 - 입력필터링 및 데이터 저장
+
+### 💡 지난주 내용 살펴보기
+
+#### 🚀 ES6 화살표 함수
+
+| 질문 | 답변 |
+|------|------|
+| **ES6 버전 화살표 함수에서 사용 제한된 함수는?** | 생성자 함수, yield 키워드 |
+| **기존 function이나 var등 선언 위치에 상관없이 인식하는 기능은?** | 호이스팅(Hoisting) |
+
+#### 📝 Form 처리
+
+| 질문 | 답변 |
+|------|------|
+| **Form 전송 시에 get 방식으로 url에 파라미터를 전송하기 위한 추가 속성은?** | `<input>` 태그의 name속성을 추가한다. |
+| **Label 태그의 주요 기능은 무엇인가?** | `<form>`요소에 의미를 부여하고 사용성을 향상시키며 웹 접근성을 높이는 중요한 역할을 한다. |
+| **Form도 이름을 지정하여 하나의 식별자로 정의할 수 있는가?** | form도 하나의 고유 식별자로 지정할 수 있다. |
+
+#### 🔧 JavaScript 기능
+
+| 질문 | 답변 |
+|------|------|
+| **입력 값의 공백을 제거하는 함수 이름은?** | `trim()` |
+| **자바스크립트 내부에서 submit 하는데 html에서 버튼의 type은?** | button, 타입을 버튼으로 지정하고 id로 식별하여 `loginForm.submit()`을 호출한다. |
+| **값 비교에 ===는 무엇을 더 검사하는가?** | `==`는 값만 비교하고 `===`는 값과 데이터 타입을 추가로 비교한다. |
+
+### 🛠️ 9주차 응용 문제
+
+#### 📏 로그인 입력 길이 제한
+
+**이메일 10글자 이하, 패스워드 15글자 이하 수정**
+
+이메일은 도메인까지 포함해서 10글자 이하가 될 수도 있겠지만 대부분 10글자 이상이 될 수밖에 없다.<br>
+그래서 `@`부터 끝까지 인식하지 못하게 하여 아이디 부분만 10글자 이하로 조건을 걸어 구현했다.
+
+**login.js의 check_input함수에 추가한다.**
+if (!emailValue.includes('@')) {
+
+    alert('올바른 이메일 형식이 아닙니다.'); //이메일 입력칸이기 때문에 @라는 문자가 들어가지 않으면 로그인 되지 않게 추가로 구현을 했다.
+    return false;
+
+}
+
+// 로컬 파트(@ 앞부분)만 추출하여 길이 검사
+const localPart = emailValue.split('@'); //@를 기준으로 앞 뒤로 배열을 생성하여 첫 번째 인덱스(아이디 부분)을 localPart에 저장한다.
+
+    if (localPart.length > 10) {
+    alert('이메일의 @ 앞부분은 10글자 이하로 입력해야 합니다.');
+    return false;
+
+}
+
+if (localPart.length < 3) {
+
+    alert('이메일의 @ 앞부분은 최소 3글자 이상 입력해야 합니다.');
+    return false;
+
+}
+
+if (passwordValue.length > 15) {
+
+    alert('비밀번호는 15글자 이하로 입력해야 합니다.');
+    return false;
+
+}
+
+
+#### 🔒 로그인 입력 제한(패턴식 활용)
+
+**1. 3글자 이상 반복 입력 x**
+
+**login.js의 check_input함수에 추가한다.**
+// 3글자 이상 반복 입력 검사<br>
+글자 반복에 대해서는 아이디부분만 인식해서 검사할 필요가 없다고 생각해서 아이디 부분만 인식하라는 조건을 추가하진 않았다.<br>
+
+const repeatedPattern = /(.{3,})\1/; // {3,} - 수량자로 바로 앞의 패턴이 3번 이상 반복되어야 함을 의미<br>
+                                     // \1 - 백레퍼런스로 첫 번째 캡처 그룹에서 매칭된 내용과 동일한 텍스트를 다시 찾는 역할
+
+if (repeatedPattern.test(emailValue)) {
+
+    alert('이메일에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+    return false;
+
+}
+
+if (repeatedPattern.test(passwordValue)) {
+
+    alert('패스워드에 3글자 이상 반복되는 패턴은 사용할 수 없습니다.');
+    return false;
+
+}
+
+**2. 연속되는 숫자 2개 이상 반복 입력 x**
+
+// 연속되는 숫자 2개 이상 반복 검사
+const consecutiveNumbers = /(\d{2,})/g;<br>
+// \d - 숫자 문자(0-9)를 의미하는 메타문자. [0-9]와 동일한 의미<br>
+// {2,} - 수량자로, 바로 앞의 패턴이 2번 이상 반복되어야 함을 의미<br>
+// g - 전역 플래그로, 문자열에서 첫 번째 매치만 찾는 것이 아니라 모든 매치를 찾는 역할<br>
+
+const emailMatches = emailValue.match(consecutiveNumbers);<br>
+
+if (emailMatches) {
+
+    for (let match of emailMatches) {
+        const regex = new RegExp(match.replace(/\d/g, '\d'), 'g');
+        const occurrences = (emailValue.match(regex) || []).length;
+        if (occurrences > 1) {
+            alert('이메일에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+            return false;
+        }
+    }
+
+}
+
+const passwordMatches = passwordValue.match(consecutiveNumbers);
+
+if (passwordMatches) {
+
+    for (let match of passwordMatches) {
+        const regex = new RegExp(match.replace(/\d/g, '\d'), 'g');
+        const occurrences = (passwordValue.match(regex) || []).length;
+        
+        if (occurrences > 1) {
+        alert('패스워드에 연속되는 숫자 2개 이상이 반복될 수 없습니다.');
+        return false;
+        }
+    }
+
+}
+
+
+### 💡 지난주 내용 살펴보기2
+
+#### 🔍 정규표현식 및 보안
+
+| 질문 | 답변 |
+|------|------|
+| **정규표현식의 문자열을 검사하는 함수는?** | `.test()` 함수 |
+| **정규표현식에서 한 개이상을 나타내는 기호표현은?** | `+` |
+| **특수문자를 필터링 해야 하는 이유는?** | 서버 내부 시스템 명령을 악의적으로 수행 가능하기 때문이다. |
+| **DOMPurify 라이브러리의 핵심 검사 함수는?** | `check_xss` 함수 |
+
+#### 🛠️ 쉘 스크립팅
+
+| 질문 | 답변 |
+|------|------|
+| **쉘 스크립팅에서 명령 실행 순서를 나타내는 특수 문자는?** | 파이프 (`|`) |
+| **쉘 스크립팅에서 명령을 구분하는 특수 문자는?** | 세미콜론 (`;`) |
+

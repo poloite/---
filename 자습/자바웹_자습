@@ -404,7 +404,7 @@ A)    if (!emailValue.includes('@')) {
          }
       }
 
-<지난주 내용 살펴보기>
+<지난주 내용 살펴보기2>
 
 1. 정규표현식의 문자열을 검사하는 함수는?
    A) match 함수
@@ -501,6 +501,8 @@ export function session_check() {
 아예 모든 함수를 session_del.js에 구현하였다.
 
 import { logout_count } from './login.js'; // 이 코드는 삭제한다.
+
+
 // 쿠키 함수들을 직접 구현
 const getCookie = (name) => {
     const cookie = document.cookie;
