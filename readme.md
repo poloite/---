@@ -75,7 +75,9 @@
 #### 📦 부트스트랩 연동에 추가된 태그 3가지
 
 `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">` <br>
+
 `<meta name="viewport" content="width=device-width, initial-scale=1">` <br>
+
 `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>`
 
 **구성:** `<link>`, `<meta>`, `<script>` 태그가 추가되었습니다.
@@ -107,14 +109,14 @@
 
 #### 🔄 함수 search_message()를 2개 이상 추가
 
-function search_message(){<br>
-    let a = "검색을 수행합니다.";<br>
-    alert(a);<br>
+function search_message(){
+    let a = "검색을 수행합니다.";
+    alert(a);
 }
 
-function search_message(){<br>
-    let a = "검색을 수행한다.";<br>
-    alert(a);<br>
+function search_message(){
+    let a = "검색을 수행한다.";
+    alert(a);
 }
 
 **실험 결과:**
@@ -127,9 +129,9 @@ function search_message(){<br>
 - Let 변수 활용하여 문자열 "검색을 수행합니다"를 저장
 - 변수를 출력하는 형태로 수정
 
-function search_message(){<br>
-    let a = "검색을 수행합니다.";<br>
-    alert(a);<br>
+function search_message(){
+    let a = "검색을 수행합니다.";
+    alert(a);
 }
 
 
@@ -166,15 +168,15 @@ function search_message(){<br>
 
 **검사할 항목:** 공백, 비속어 5개
 
-function search_message(){<br>
-    let a = "검색을 수행합니다.";<br>
-    alert(a);<br>
-    alert("공백과 비속어를 검사합니다.");<br>
+function search_message(){
+    let a = "검색을 수행합니다.";
+    alert(a);
+    alert("공백과 비속어를 검사합니다.");
 }
 
-function googleSearch() {<br>
-    const searchTerm = document.getElementById("search_input").value; // 검색어로 설정<br>
-    const forbiddenWords = ["바보", "멍청이", "욕1", "욕2", "욕3"]; //배열로 비속어 목록 만들기<br>
+function googleSearch() {
+    const searchTerm = document.getElementById("search_input").value; // 검색어로 설정
+    const forbiddenWords = ["바보", "멍청이", "욕1", "욕2", "욕3"]; //배열로 비속어 목록 만들기
 
     // 공백 검사<br>
     if (searchTerm === "") {
