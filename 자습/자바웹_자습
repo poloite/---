@@ -1,32 +1,46 @@
-; <!--3주차-->
+<!--3주차-->
 
 
-; <!--지난 주 내용 살펴보기
-; 문서 시작 태그: <html>
-; 타이틀 제목: <tiltle> </tiltle>
-; 문서 몸체: <body>
-; 문장 정렬: style="display: flex; justify-content: center ; -> display: flex를 통해 flexbox 컨테이너로 지정하고  justify-content: center로 flex 아이템들을 가운데로 정렬하는 역활을 한다.  
-; 문장 크기: <h1~<h6> or font size?
-; 이미지 삽입: <img src="이미지 파일 경로" >
-; 밑줄: <hr>
+<!--지난 주 내용 살펴보기
+문서 시작 태그
+A)<html>
 
-; 연습문제
-; 1. 드랍다운 메뉴에서 비어있는 href의 자리에 링크 삽입하기 
+타이틀 제목
+A)<tiltle> </tiltle>
 
-; <li><a class="dropdown-item" href="https://events.fconline.nexon.com/250424/Both">피파 홈페이지</a></li>
-;        <li><a class="dropdown-item" href="https://shop.fconline.nexon.com/">피파 웹상점</a></li>
-;        <li><hr class="dropdown-divider"></li>
-;        <li><a class="dropdown-item" href="https://fconline.nexon.com/datacenter/dailysquad">데이터센터</a></li>
+문서 몸체
+A)<body>
 
-; 2. 네이게이션 바에 색상 추가하기
-;  bg-primary" data-bs-theme="dark"
-;  위의 코드를 <nav class="navbar navbar-expand-lg 다음에 추가하여 배경은 파란색이며, 
-;  어두운 테마이기 때문에 글씨의 색깔은 흰색이다.
+문장 정렬 
+A)style="display: flex; justify-content: center ; 
+  -> display: flex를 통해 flexbox 컨테이너로 지정하고  justify-content: center로 flex 아이템들을 가운데로 정렬하는 역활을 한다.  
 
-; 3.테이블에 색상 추가하기
-; 테이블의 색상은 테이블 전체에 색상을 추가할 수도 있고, 행과 셀에 각각 추가할 수도 있다.
-; 나는 테이블 전체에 색상을 추가하였다.
-;  <table class="table caption-top table-primary"  border="5"> -->
+문장 크기
+A)<h1~<h6> or font size?
+
+이미지 삽입
+A)<img src="이미지 파일 경로" >
+
+;밑줄
+A)<hr>
+
+연습문제
+1. 드랍다운 메뉴에서 비어있는 href의 자리에 링크 삽입하기 
+
+<li><a class="dropdown-item" href="https://events.fconline.nexon.com/250424/Both">피파 홈페이지</a></li>
+       <li><a class="dropdown-item" href="https://shop.fconline.nexon.com/">피파 웹상점</a></li>
+       <li><hr class="dropdown-divider"></li>
+       <li><a class="dropdown-item" href="https://fconline.nexon.com/datacenter/dailysquad">데이터센터</a></li>
+
+2. 네이게이션 바에 색상 추가하기
+ bg-primary" data-bs-theme="dark"
+ 위의 코드를 <nav class="navbar navbar-expand-lg 다음에 추가하여 배경은 파란색이며, 
+ 어두운 테마이기 때문에 글씨의 색깔은 흰색이다.
+
+3.테이블에 색상 추가하기
+테이블의 색상은 테이블 전체에 색상을 추가할 수도 있고, 행과 셀에 각각 추가할 수도 있다.
+나는 테이블 전체에 색상을 추가하였다.
+ <table class="table caption-top table-primary"  border="5"> -->
 
 
 
@@ -36,13 +50,16 @@
 
 
 ; <!--지난주 내용 살펴보기
-; <meta> 태그의 추가 위치는? <meta>태그는 <head>태그에 추가 한다.
+; <meta> 태그의 추가 위치는? 
+  A)<meta>태그는 <head>태그에 추가 한다.
 
-; 하이퍼링크: <a href = "파일 경로" >
+; 하이퍼링크
+  A)<a href = "파일 경로" >
 
-; Link와 하이퍼링크의 차이점은: link 태그는 <head>태그에 추가하고 하이퍼링크는 <body>태그에 추가한다.
-;                              그리고 link태그는 <head>태그 안에 외부 자원(css)을 추가할 때 쓰인다.
-;                             하이퍼링크는 상호작용을 하면 링크로 이동할 때 쓰인다.
+; Link와 하이퍼링크의 차이점은
+  A)link 태그는 <head>태그에 추가하고 하이퍼링크는 <body>태그에 추가한다.
+;   그리고 link태그는 <head>태그 안에 외부 자원(css)을 추가할 때 쓰인다.
+;   하이퍼링크는 상호작용을 하면 링크로 이동할 때 쓰인다.
 
 ; 부트스트랩 연동에 추가된 태그 3가지
 ; <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -50,20 +67,22 @@
 ; <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 ; 위의 3개의 <link>, <meta>, <script>태그가 추가되었다.
 
-; 기본 레이아웃 영역을 무엇이라 하는가? : 테이블?
+; 기본 레이아웃 영역을 무엇이라 하는가? 
+  A)테이블?
 
 ; 디자인 템플릿 지정에 필요한 것은?
-; css, 자바스크립트, 부트스트랩?
+; A) css, 자바스크립트, 부트스트랩?
 
 ; 표 병합을 위한 속성 2가지는?
-; <rowspan> : 행 병합, <colspan>: 열 병합
+; A) <rowspan> : 행 병합, <colspan>: 열 병합
 
 ; 4주차 연습문제
 
 ; 검색 창 search.js를 수정하여 직접 실행해본다.
 
 ; • 자바스크립트의 클릭 이벤트 식별자 수정하기
-;   현재 식별자의 값은?  A) ("search_btn")
+;   현재 식별자의 값은?  
+    A) ("search_btn")
 
 ;   식별자 값을 search_button_msg 로 수정한다.
 ;   A) document.getElementById("search_button_msg").addEventListener('click',search_message);
@@ -71,7 +90,7 @@
 ;• Index.html의 버튼 클릭 id 식별자를 수정한다.
 
 ; • 수정된 식별자 값과 일치해야 한다.
-; A) <button class="btn btn-outline-success" id = "search_button_msg" type="submit">검색하기</button>
+;   A) <button class="btn btn-outline-success" id = "search_button_msg" type="submit">검색하기</button>
 
 ;  함수 search_message()를 2개 이상 추가한다.
 ;A)  function search_message(){
@@ -104,21 +123,29 @@
 
 ; <!--지난주 내용 살펴보기
 
-; 자바스크립트를 추가하는 태그는?: <script>태그
+; 자바스크립트를 추가하는 태그는?
+  A)<script>태그
 
-; 파일로 작성된 자바스크립트는 어디에 추가되는가? <script>태그로 html 문서에 추가된다.
+; 파일로 작성된 자바스크립트는 어디에 추가되는가? 
+  A)<script>태그로 html 문서에 추가된다.
 
-; 자바스크립트가 제어하는 트리구조 문서를 무엇이라 하는가?: DOM(Document Object Model)
+; 자바스크립트가 제어하는 트리구조 문서를 무엇이라 하는가?
+  A)DOM(Document Object Model)
 
-; 자바스크립트 변수 선언 방식 3가지: var, let, const
+; 자바스크립트 변수 선언 방식 3가지
+  A)var, let, const
 
-; ES6 표준 이후 안전성을 위해 추가된 변수 선언 방식은?: let, const
+; ES6 표준 이후 안전성을 위해 추가된 변수 선언 방식은?
+  A)let, const
 
-; 문서의 최상위 문서의객체의 이름은?: document
+; 문서의 최상위 문서의객체의 이름은?
+  A)document
 
-; 문서의 객체 식별자를인식하는 메서드는?: getElementById
+; 문서의 객체 식별자를인식하는 메서드는? 
+  A)getElementById
 
-; 마우스 이벤트 중 더블 클릭의 이름은? dbclick
+; 마우스 이벤트 중 더블 클릭의 이름은
+  A)dbclick
 
 
 ; 5주차 연습문제
@@ -164,37 +191,50 @@
 
 ; <!--지난주 내용 살펴보기
 
-; JS의 참조 데이터 타입은? 2개 이상: 객체, 배열, 함수, 자료구조(MAP, SET)
+; JS의 참조 데이터 타입은? 2개 이상 
+  A) 객체, 배열, 함수, 자료구조(MAP, SET)
 
-; Undefied 데이터 타입의 특징은?: Undefied는 원시 타입으로 선언 후 값을 할당하지 않은 변수를 말한다.
-;                                그리고 반드시 값을 직접 확인해야 한다.
+; Undefied 데이터 타입의 특징은?: 
+  A)Undefied는 원시 타입으로 선언 후 값을 할당하지 않은 변수를 말한다.
+;   그리고 반드시 값을 직접 확인해야 한다.
 
-; 문자열과 변수를 조합하여 출력하는 방법을무엇이라 하는가?: 템플릿 리터럴럴
+; 문자열과 변수를 조합하여 출력하는 방법을무엇이라 하는가?
+  A)템플릿 리터럴
 
 ; Get / post 2가지 전송방식의 핵심 차이점은?
-; Get방식은 URL에 정보가 노출되어 보안이 취약하고 
-; Post방식은 URL에 정보가 노출되지 않아 보안에 용이하다.
+; A)Get방식은 URL에 정보가 노출되어 보안이 취약하고 
+;   Post방식은 URL에 정보가 노출되지 않아 보안에 용이하다.
 
 
-; 페이지 요청에 Utf-8 인코딩 처리 전용 함수는?: encodeURIComponent 함수이다.
+; 페이지 요청에 Utf-8 인코딩 처리 전용 함수는?
+  A)encodeURIComponent 함수이다.
 
-; 페이지 로딩과 동시에js를 호출하는 속성은?: defer 속성이다.
+; 페이지 로딩과 동시에js를 호출하는 속성은?
+  A)defer 속성이다.
 
-; 상대경로를 지정하는경우 상위 폴더를 지정하는 방법은?: ../를 사용한다.
+; 상대경로를 지정하는경우 상위 폴더를 지정하는 방법은?
+  A)../를 사용한다.
 
-; 자바스크립트의 핵심타이머 함수는?: setTimeout 함수
+; 자바스크립트의 핵심타이머 함수는?
+  A)setTimeout 함수
 
 
 ; 6주차 응용 문제
 
 ; • login 폴더에 logout.html 파일을 작성한다.
-; • 기존 index_login.html 전체 소스코드를 가져온다.
+; • 기존 login.html 전체 소스코드를 가져온다.
 ; • Head 및 body부터 footer 등 기본 소스 코드를 유지한다.
 ; • 그림과 같은 로그아웃 화면으로 수정한다.
 ; • 로그아웃 버튼 기능
 ; • 클릭하면 index.html로 연결한다. 
 ; • 원래 사이트 메인으로 돌아온다.
 
+A)login.html의 전체 소스코드를 가져와서 logout.html에 필요한 스크립트를 제외한 나머지를 주석처리 하거나 삭제했다.
+  그리고 원래의 로그인 버튼을 제외한 이메일과 비밀번호 입력창등의 기능들은 삭제하였다. 
+  하지만 이 로그아웃 기능은 10주차까지 잘 실행되지 않았다. 
+  그 이유는 logout_form과 logout_btn이라는 변수가 선언되지 않았고 로그아웃 기능을 하는 함수가 선언되지 않았기 때문이다.
+  (10주차에서는 변수와 함수를 선언했지만 그 방식(session.js에 추가했지만 복잡하고 꼬이는 점들도 많았음)이 이상해서 기능이 제대로 실행되지 않았다.)
+  따라서 11주차에 교수님의 솔루션을 받아 session_del.js라는 자바스크립트 파일을 따로로 만들어서 로그아웃 기능과 세션을 삭제하는 기능을 하는 코드를 만들었다.  
 ; <logout.html 코드>
 
 ; <!DOCTYPE html> 
@@ -206,7 +246,9 @@
 ;         <link rel="stylesheet" href="../css/login.css">
 ;         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 ;         <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.5/purify.min.js" integrity="sha512-/CUtA84sWWqWEBejNrrtWa7Yc4cth3Ome2ymvCKOo9YcZ4sh98tndUy4LutE2xGcAgD4fyz16y+gSyJdGCB5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
+          <!-- <script type="text/javascript" defer src="../js/session.js" defer></script> -->
+          <script type="text/javascript" defer src="../js/session_del.js" defer></script>
+          <!-- <script type="text/javascript" defer src="../js/login.js" defer></script> -->
 ;     <body>
 
 ;         <section class="vh-100 gradient-custom">
@@ -217,9 +259,9 @@
 ;                             <div class="card-body p-5 text-center">
 
 ;                                 <div class="mb-md-5 mt-md-4 pb-5">
-;                                     <form method="get" action="/login/index_login.html"> 
-;                                         <h2 class="fw-bold mb-2 text-uppercase">로그아웃 메인화면</h2>
-;                                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" id="login_btn" type="button" onclick="location.href='../Web_main 20220987/index.html'">로그아웃</button> 타입을 button이라 하지 않으면 자바 스크립트를 실행하지 않고 그냥 form을 실행시킨다.
+;                                     <form id="logout_form" method="get" action="../Web_main 20220987/Index.html"> 
+                                        <h2 class="fw-bold mb-2 text-uppercase">로그아웃 메인화면</h2>
+                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" id="logout_btn" type="button">로그아웃</button> //타입을 button이라 하지 않으면 자바 스크립트를 실행하지 않고 그냥 form을 실행시킨다.
 ;                                     </form>
                                   
 ;                                 </div>
@@ -237,6 +279,30 @@
 ;     </body>
 ; </html> 
 
+<session_del.js>
+
+function session_del() {//세션 삭제
+        if (sessionStorage) {
+            sessionStorage.removeItem("Session_Storage_id");
+            sessionStorage.removeItem("Session_Storage_pass");
+            alert('로그아웃 버튼 클릭 확인 : 세션 스토리지를 삭제합니다.');
+        } 
+        else {
+            alert("세션 스토리지 지원 x");
+        }
+    }
+
+
+const check = () => {
+    const logoutForm = document.getElementById('logout_form');
+    const logoutBtn = document.getElementById('logout_btn');
+        session_del(); // 세션 삭제
+      
+    logoutForm.submit();
+}    
+document.getElementById("logout_btn").addEventListener('click', check);
+
+
 ; 6주차 연습문제
 
 ; JS 및 HTML 정리하기: 들여쓰기 및 head 태그에 자바스크립트 정리 완료-->
@@ -246,33 +312,41 @@
 
 ; 지난주 내용 살펴보기
 
-; 1. Es6 버전 화살표 함수에서 사용 제한된 함수는? A) 생성자 함수, yield 키워드
+; 1. Es6 버전 화살표 함수에서 사용 제한된 함수는? 
+     A) 생성자 함수, yield 키워드
 
-; 2. 기존 function이나 var등 선언 위치에 상관없이 인식하는 기능은? A) 호이스팅(Hoisting)
+; 2. 기존 function이나 var등 선언 위치에 상관없이 인식하는 기능은?  
+     A) 호이스팅(Hoisting)
 
-; 3. Form 전송 시에 get 방식으로 url에 파라미터를 전송하기 위한 추가 속성은? A) <input> 태그의 name속성을 추가한다.
+; 3. Form 전송 시에 get 방식으로 url에 파라미터를 전송하기 위한 추가 속성은? 
+     A) <input> 태그의 name속성을 추가한다.
 
-; 4. Label 태그의 주요 기능은 무엇인가? A) <form>요소에 의미를 부여하고 사용성을 향상시키며 웹 접근성을 높이는 중요한 역활을 한다.
+; 4. Label 태그의 주요 기능은 무엇인가? 
+     A) <form>요소에 의미를 부여하고 사용성을 향상시키며 웹 접근성을 높이는 중요한 역활을 한다.
 
-; 5. 입력 값의 공백을 제거하는 함수 이름은? A)trim()
+; 5. 입력 값의 공백을 제거하는 함수 이름은? 
+     A)trim()
 
-; 7. Form도 이름을 지정하여 하나의 식별자로 정의할 수 있는가? A) form도 하나의 고유 식별자로로 지정할 수 있다.
+; 7. Form도 이름을 지정하여 하나의 식별자로 정의할 수 있는가? 
+     A) form도 하나의 고유 식별자로로 지정할 수 있다.
 
-; 8. 자바스크립트 내부에서 submit 하는데 html에서 버튼의 type은? A) button, 타입을 버튼으로 지정하고 id로 식별하여 loginForm.submit()을 호출한다.
+; 8. 자바스크립트 내부에서 submit 하는데 html에서 버튼의 type은? 
+     A) button, 타입을 버튼으로 지정하고 id로 식별하여 loginForm.submit()을 호출한다.
 
-; 9. 값 비교에 ===는 무엇을 더 검사하는가?  A) ==는 값만 비교하고 ===는 값과 데이터 타입을 추가로 비교한다.
+; 9. 값 비교에 ===는 무엇을 더 검사하는가?  
+     A) ==는 값만 비교하고 ===는 값과 데이터 타입을 추가로 비교한다.
 
 
-;응용 문제 풀기 
+; 응용 문제 풀기 
 
 로그인 입력 길이 제한 (아래의 코드를 login.js에 추가한다.)
 • 이메일 10글자 이하, 패스워드 15글자 이하 수정
    
-   하지만 이메일은 도메인까지 포함해서 10글자 이하가 될 수도 있겠지만 대부분 10글자 이상이 될 수밖에 없다. 그래서 방법이 두 가지가 있는데 그냥 단순하게 글자 갯수만 올리면 되겠지만 
-   @부터 끝까지 인식하지 못하게 하여 아이디 부분만 10글자 이하로 조건을 걸어 구현을 해봤다.
+   하지만 이메일은 도메인까지 포함해서 10글자 이하가 될 수도 있겠지만 대부분 10글자 이상이 될 수밖에 없다. 
+   그래서 방법이 두 가지가 있는데 그냥 단순하게 글자 갯수만 올리면 되겠지만 @부터 끝까지 인식하지 못하게 하여 아이디 부분만 10글자 이하로 조건을 걸어 구현을 해봤다.
 
 A)    if (!emailValue.includes('@')) {
-        alert('올바른 이메일 형식이 아닙니다.');
+        alert('올바른 이메일 형식이 아닙니다.'); //이메일 입력칸이기 때문에 @라는 문자가 들어가지 않으면 로그인 되지 않게 추가로 구현을 했다.
         return false;
     }
     
@@ -295,7 +369,7 @@ A)    if (!emailValue.includes('@')) {
 
 • 로그인 입력 제한(패턴식 활용) (아래의 코드들을 login.js에 추가한다.)
  1. 3글자 이상 반복 입력 x
-   A)  // 3글자 이상 반복 입력 검사 (이메일)
+   A)  // 3글자 이상 반복 입력 검사 (이메일) //글자 반복에 대해서는 아이디부분만 인식해서 검사할 필요가 없다고 생각해서 아이디 부분만 인식하라는 조건을 추가하진 않았다.
       const repeatedPattern = /(.{3,})\1/;   {3,} - 수량자로 바로 앞의 패턴이 3번 이상 반복되어야 함을 의미한다.
                                              \1 - 백레퍼런스(backreference)로 첫 번째 캡처 그룹에서 매칭된 내용과 동일한 텍스트를 다시 찾는 역활을 해준다.
       if (repeatedPattern.test(emailValue)) {
@@ -337,6 +411,26 @@ A)    if (!emailValue.includes('@')) {
                }
          }
       }
+
+<지난주 내용 살펴보기>
+
+1. 정규표현식의 문자열을 검사하는 함수는?
+   A) match 함수
+
+2. 쉘 스크립팅에서 명령 실행 순서를 나타내는 특수 문자는?
+   A) 파이프 (|)
+
+3. 정규표현식에서 한 개이상을 나타내는 기호표현은?
+   A) +
+
+4. 특수문자를 필터링 해야 하는 이유는?
+   A) 서버 내부 시스템 명령을 악의적으로 수행 가능하기 때문이다.
+
+5. DOMPurify 라이브러리의 핵심 검사 함수는?
+   A) check_xss 함수
+
+6. 쉘 스크립팅에서 명령구분 명령을 구분하는 특수 문자는?
+   A) 세미콜론 (;)
 
 
 
@@ -411,7 +505,7 @@ export function session_check() {
     }
 }
 
-!!위의 처럼 구현하고 싶었으나 로그아웃 페이지에서 로그아웃 버튼을 클릭했을 때 오류메세지도 안뜨고 아무 반응이 없어서 아래의 코드로 수정하였다.
+!!위의 처럼 구현을 해봤으나 로그아웃 페이지에서 로그아웃 버튼을 클릭했을 때 오류메세지도 안뜨고 아무 반응이 없어서 아래의 코드로 수정하였다.
 아예 모든 함수를 session_del.js에 구현하였다.
 
 import { logout_count } from './login.js'; // 이 코드는 삭제한다.
@@ -447,3 +541,128 @@ const logout_count = () => {
     console.log("로그아웃 횟수:", newCount);
     alert("로그아웃 횟수: " + newCount + "회");
 };
+
+<지난주 내용 살펴보기>
+
+1. 쿠키 저장소 대신 사용할 수 있는 영구적인 저장소는?
+   A) 로컬 스토리지(Local storage)
+
+2. 자바스크립트에서 지원하는 쿠키 객체의 이름은?
+   A) document.cookie (document 객체의 cookie 속성)
+
+3. 쿠키를 삭제하려면 무엇을 수정해야 하는가?
+   A)만료 날짜를 과거(-1)로 수정하거나 브라우저별로 방법이 다르지만 브라우저 자체에서 쿠키를 삭제하는 방법이 있다.
+
+4. 쿠키를 설정할 때 보안옵션 설정은?
+   A) samesite속성을 사용한다.
+      document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; 
+      path=/" + ";SameSite=None; Secure";
+
+5. 다른 도메인에서 쿠키전송을 차단 하는 정책을 무엇이라 하는가?
+   A)CORS정책
+
+6. 쿠키 내부의 키(KEY)에 저장할 수 있는 데이터타입/자료구조는?
+   A) 문자열로만 저장할 수 있다. 다른 데이터타입으로 저장하려면 직렬화(Serialization)를 통해 문자열로 변환해야 한다.
+      그리고 문자열에 특수문자나 공백이 포함된 경우 URL인코딩이 필요하다.
+
+
+<응용 문제 풀기>
+
+6주차 파트를 보면 나와있듯이 10주차에서 session.js에 로그아웃 기능과 세션을 삭제하는 기능을 추가하였지만 기능이 잘 구현되지 않았다.
+그래서 11주차에 교수님의 솔루션을 받아 따로 session_del.js 파일을 만들어 기능을 구현하였다. (오류도 없었고 잘 구현되었다.)
+
+<10주차 연습문제>
+
+• 로그인 실패 횟수가 x번인 경우 로그인 제한
+
+
+A)로그인 실패 및 제한하는 함수(login_failed) 구현과 로그인 제한 상태 여부를 확인 하는 함수(check_login_blocked)와 로그인 성공시 저장된 쿠키를 삭제하는 함수(reset_login_failed)
+  login.js에서 login_count 위에 추가하였다.
+
+// 로그인 실패 횟수 관리 함수
+const login_failed = () => {
+    const cookieValue = getCookie("login_failed_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+    
+    setCookie("login_failed_cnt", newCount.toString(), 1); // 1분 동안 유지
+    
+    console.log("로그인 실패 횟수:", newCount);
+    if (newCount >= 3) {
+        alert("로그인 실패 횟수가 3회에 도달했습니다. 로그인이 제한됩니다.");
+        // 로그인 제한 상태를 쿠키에 저장
+        setCookie("login_blocked", "true", 1); //로그인 실패 횟수가 3회 이상일 때 login_blocked라는 쿠키의 값을 1 더한다.
+        return true; // 제한 상태 반환
+    } else {
+        alert(`로그인 실패 횟수: ${newCount}회 (3회 도달 시 로그인 제한)`);  //로그인 실패할 때 마다 위에 메세지창으로 몇번 실패했는지 알려줌
+        return false; // 아직 제한되지 않음
+    }
+};
+
+// 로그인 제한 상태 확인 함수
+const check_login_blocked = () => {
+    const blockedStatus = getCookie("login_blocked");
+    const failedCount = getCookie("login_failed_cnt");
+    
+    if (blockedStatus === "true" || parseInt(failedCount) >= 3) {  //만약 실패횟수가 3회 이상이거나 blockedStatus가 true일 떄 함수가 실행된다.
+        return true;
+    }
+    return false;
+};
+
+// 로그인 실패 횟수 초기화 함수 (로그인 성공 시 사용)
+const reset_login_failed = () => {
+    setCookie("login_failed_cnt", "", -1); // 쿠키 삭제
+    setCookie("login_blocked", "", -1); // 제한 상태 쿠키 삭제  
+};
+
+
+• 로그인이 제한된 상태를 화면에 출력하기 위해서 login.js에 init함수를 수정한다.
+
+function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
+   const emailInput = document.getElementById('typeEmailX');
+    const idsave_check = document.getElementById('idSaveCheck');
+    let get_id = getCookie("id");
+    
+    if(get_id) {
+        emailInput.value = get_id;
+        idsave_check.checked = true;
+    }
+    
+    // 로그인 제한 상태 확인 및 표시
+    if (check_login_blocked()) {
+        const failedCount = getCookie("login_failed_cnt") || 0;
+        
+        // 경고 메시지 표시
+        const warningDiv = document.createElement('div');
+        warningDiv.style.color = 'red';
+        warningDiv.style.fontWeight = 'bold';
+        warningDiv.style.textAlign = 'center';
+        warningDiv.style.marginBottom = '10px';
+        warningDiv.innerHTML = `⚠️ 로그인이 1분간 제한되었습니다<br>실패 횟수: ${failedCount}회`;
+        
+        // 로그인 폼 위에 경고 메시지 삽입
+        const loginForm = document.getElementById('login_form');
+        loginForm.parentNode.insertBefore(warningDiv, loginForm);
+        
+        // 입력 필드 비활성화
+        document.getElementById('typeEmailX').disabled = true;
+        document.getElementById('typePasswordX').disabled = true;
+        document.getElementById('login_btn').disabled = true;
+    } else {
+        // 현재 실패 횟수 표시 (있는 경우)
+        const failedCount = getCookie("login_failed_cnt");
+        if (failedCount && parseInt(failedCount) > 0) {
+            const infoDiv = document.createElement('div');
+            infoDiv.style.color = 'orange';
+            infoDiv.style.textAlign = 'center';
+            infoDiv.style.marginBottom = '10px';
+            infoDiv.innerHTML = `⚠️ 로그인 실패 횟수: ${failedCount}회 (3회 도달 시 제한)`;
+            
+            const loginForm = document.getElementById('login_form');
+            loginForm.parentNode.insertBefore(infoDiv, loginForm);
+        }
+    }
+    
+    session_check();
+}
