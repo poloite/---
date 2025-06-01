@@ -388,7 +388,7 @@ document.getElementById("logout_btn").addEventListener('click', check);
 이메일은 도메인까지 포함해서 10글자 이하가 될 수도 있겠지만 대부분 10글자 이상이 될 수밖에 없다.<br>
 그래서 `@`부터 끝까지 인식하지 못하게 하여 아이디 부분만 10글자 이하로 조건을 걸어 구현했다.
 
-**login.js의 check_input함수에 추가한다.**
+**login.js의 check_input함수에 추가한다.** <br>
 if (!emailValue.includes('@')) {
 
     alert('올바른 이메일 형식이 아닙니다.'); //이메일 입력칸이기 때문에 @라는 문자가 들어가지 않으면 로그인 되지 않게 추가로 구현을 했다.
@@ -396,8 +396,9 @@ if (!emailValue.includes('@')) {
 
 }
 
-// 로컬 파트(@ 앞부분)만 추출하여 길이 검사
-const localPart = emailValue.split('@'); //@를 기준으로 앞 뒤로 배열을 생성하여 첫 번째 인덱스(아이디 부분)을 localPart에 저장한다.
+// 로컬 파트(@ 앞부분)만 추출하여 길이 검사<br>
+const localPart = emailValue.split('@');<br> 
+//@를 기준으로 앞 뒤로 배열을 생성하여 첫 번째 인덱스(아이디 부분)을 localPart에 저장한다.
 
     if (localPart.length > 10) {
     alert('이메일의 @ 앞부분은 10글자 이하로 입력해야 합니다.');
@@ -424,12 +425,13 @@ if (passwordValue.length > 15) {
 
 **1. 3글자 이상 반복 입력 x**
 
-**login.js의 check_input함수에 추가한다.**
+**login.js의 check_input함수에 추가한다.** <br>
 // 3글자 이상 반복 입력 검사<br>
 글자 반복에 대해서는 아이디부분만 인식해서 검사할 필요가 없다고 생각해서 아이디 부분만 인식하라는 조건을 추가하진 않았다.<br>
 
-const repeatedPattern = /(.{3,})\1/; // {3,} - 수량자로 바로 앞의 패턴이 3번 이상 반복되어야 함을 의미<br>
-                                     // \1 - 백레퍼런스로 첫 번째 캡처 그룹에서 매칭된 내용과 동일한 텍스트를 다시 찾는 역할
+const repeatedPattern = /(.{3,})\1/; <br>
+// {3,} - 수량자로 바로 앞의 패턴이 3번 이상 반복되어야 함을 의미<br>
+// \1 - 백레퍼런스로 첫 번째 캡처 그룹에서 매칭된 내용과 동일한 텍스트를 다시 찾는 역할
 
 if (repeatedPattern.test(emailValue)) {
 
@@ -447,7 +449,7 @@ if (repeatedPattern.test(passwordValue)) {
 
 **2. 연속되는 숫자 2개 이상 반복 입력 x**
 
-// 연속되는 숫자 2개 이상 반복 검사
+// 연속되는 숫자 2개 이상 반복 검사<br>
 const consecutiveNumbers = /(\d{2,})/g;<br>
 // \d - 숫자 문자(0-9)를 의미하는 메타문자. [0-9]와 동일한 의미<br>
 // {2,} - 수량자로, 바로 앞의 패턴이 2번 이상 반복되어야 함을 의미<br>
@@ -503,3 +505,311 @@ if (passwordMatches) {
 | **쉘 스크립팅에서 명령 실행 순서를 나타내는 특수 문자는?** | 파이프 (`|`) |
 | **쉘 스크립팅에서 명령을 구분하는 특수 문자는?** | 세미콜론 (`;`) |
 
+
+
+---
+## 🎯 10주차 - 쿠키 관리 및 로그인 보안
+
+### 💡 지난주 내용 살펴보기
+
+#### 🍪 쿠키 관리
+
+| 질문 | 답변 |
+|------|------|
+| **쿠키 저장소 대신 사용할 수 있는 영구적인 저장소는?** | 로컬 스토리지(Local storage) |
+| **자바스크립트에서 지원하는 쿠키 객체의 이름은?** | document.cookie (document 객체의 cookie 속성) |
+| **쿠키를 삭제하려면 무엇을 수정해야 하는가?** | 만료 날짜를 과거(-1)로 수정하거나 브라우저별로 방법이 다르지만 브라우저 자체에서 쿠키를 삭제하는 방법이 있습니다. |
+
+#### 🔒 쿠키 보안
+
+| 질문 | 답변 |
+|------|------|
+| **쿠키를 설정할 때 보안옵션 설정은?** | samesite속성을 사용합니다. |
+| **다른 도메인에서 쿠키전송을 차단하는 정책을 무엇이라 하는가?** | CORS정책 |
+| **쿠키 내부의 키(KEY)에 저장할 수 있는 데이터타입/자료구조는?** | 문자열로만 저장할 수 있습니다. 다른 데이터타입으로 저장하려면 직렬화(Serialization)를 통해 문자열로 변환해야 합니다. |
+
+### 🛠️ 10주차 응용 문제
+
+#### 🍪 쿠키 파트 응용 문제 (login.js에 추가)
+
+#### 🍪 로그인/로그아웃 횟수 쿠키 저장하기
+
+**login.js에 추가 구현**
+- 로그인 `login_count()` 함수
+- 쿠키 이름: `login_cnt`
+- 로그아웃 `logout_count()` 함수  
+- 쿠키 이름: `logout_cnt`
+
+**기능 구현**
+- 버튼을 클릭할 때마다 횟수(정수)를 증가
+- 기존 쿠키의 카운트 값을 얻는다
+- 쿠키의 값을 +1 업데이트 한다
+
+**로그인 login_count() 함수, 쿠키 이름: login_cnt**
+
+const login_count = () => {
+
+    const cookieValue = getCookie("login_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+
+    setCookie("login_cnt", newCount.toString(), 30);
+
+    console.log("로그인 횟수:", newCount);
+    alert("로그인 횟수: " + newCount + "회");
+
+};
+
+
+**구현 포인트:** check_input 함수 마지막 부분에 `login_count();`를 추가합니다. 그 이유는 로그인 과정을 마친 뒤 마지막에 횟수를 추가하기 위해서이다.
+
+**로그아웃 logout_count() 함수, 쿠키 이름: logout_cnt**
+
+const logout_count = () => {
+
+    const cookieValue = getCookie("logout_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+
+    setCookie("logout_cnt", newCount.toString(), 30);
+
+    console.log("로그아웃 횟수:", newCount);
+    alert("로그아웃 횟수: " + newCount + "회");
+
+};
+
+
+**전역 함수 등록**
+
+// 8. 전역 함수 등록 (session_del에 사용할 수 있도록 전역 변수로 등록했다.)<br>
+export { login_count, logout_count };
+
+
+#### 🚪 로그아웃 기능 구현 문제 해결
+
+**초기 구현 시도**
+
+**session_del.js에 다음과 같이 추가**
+
+import { logout_count } from './login.js';
+
+const check = () => {
+
+    const logoutForm = document.getElementById('logout_form');
+    const logoutBtn = document.getElementById('logout_btn');
+    logout_count(); //로그아웃 횟수
+    session_del(); // 세션 삭제
+    logoutForm.submit();
+
+};
+
+
+**문제점 발견**
+logout.html에서 session_del.js를 로드할 때 login.js에서 임포트한 session.js의 `session_check()` 함수가 실행되어 로그아웃 페이지로 갈 때 "이미 로그인 되었습니다."라고 메세지가 뜨면서 index_login.html파일로 다시 돌아가는 문제 발생.
+
+
+**최종 해결책**
+
+여러러 방법으로도 로그아웃 버튼 클릭 시 아무 반응이 없어서 **모든 함수를 session_del.js에 직접 구현**:
+
+// 쿠키 함수들을 직접 구현<br>
+const getCookie = (name) => {
+
+    const cookie = document.cookie;,
+    if (cookie != "") {
+        const cookie_array = cookie.split("; ");
+        for (const index in cookie_array) {
+            const cookie_name = cookie_array[index].split("=");
+            if (cookie_name == name) {
+                return unescape(cookie_name);
+            }
+        }
+    }
+    return "";
+};
+
+const setCookie = (name, value, expiredays) => {
+
+    const date = new Date();
+    date.setDate(date.getDate() + expiredays);
+    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
+
+};
+
+const logout_count = () => {
+
+    console.log('logout_count 함수 실행됨');
+    const cookieValue = getCookie("logout_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+
+    setCookie("logout_cnt", newCount.toString(), 30);
+
+    console.log("로그아웃 횟수:", newCount);
+    alert("로그아웃 횟수: " + newCount + "회");
+
+};
+
+const check = () => {
+    
+    const logoutForm = document.getElementById('logout_form');
+    const logoutBtn = document.getElementById('logout_btn');
+        logout_count(); //추가된 부분
+        session_del(); // 세션 삭제
+      
+    logoutForm.submit();
+
+}   
+
+### 🛠️ 10주차 응용문제2
+
+#### 🚫 세션 삭제 기능 추가
+
+**10주차 수업 시간에 구현을 하였지만 기능이 제대로 작동하지 않았다.**<br>
+**11주차에서 교수님의 솔루션을 받아 session_del.js를 따로 만들어 로그아웃 기능과 세션 삭제 기능을 구현하였고 코드는 6주차에 나와있다.**
+
+
+### 🛠️ 10주차 연습문제
+
+#### 🚫 로그인 실패 횟수 제한 기능
+
+**로그인 실패 및 제한하는 함수들 구현**
+
+아래의 코드들을 login.js에서 login_count 위에 추가
+
+
+// 분 단위 쿠키 설정 함수(원래 login.js에 있는 setCookie는 일(day)단위로 쿠키를 저장하기 때문에 분 단위로 저장하기 위해 따로 쿠키를 저장하는 함수를 만들었다.)<br>
+const setCookieMinutes = (name, value, expireMinutes) => {
+    const date = new Date();
+    date.setTime(date.getTime() + (expireMinutes * 60 * 1000));
+    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
+};
+
+// 로그인 실패 횟수 관리 함수<br>
+const login_failed = () => {
+
+    const cookieValue = getCookie("login_failed_cnt");
+    const currentCount = cookieValue && cookieValue !== "" ? parseInt(cookieValue) : 0;
+    const newCount = currentCount + 1;
+
+    setCookie("login_failed_cnt", newCount.toString(), 1); // 1분 동안 유지
+
+    console.log("로그인 실패 횟수:", newCount);
+    if (newCount >= 3) {
+        alert("로그인 실패 횟수가 3회에 도달했습니다. 로그인이 제한됩니다.");
+        setCookie("login_blocked", "true", 1);
+        return true; // 제한 상태 반환
+    } else {
+        alert(`로그인 실패 횟수: ${newCount}회 (3회 도달 시 로그인 제한)`);
+        return false; // 아직 제한되지 않음
+    }
+
+};
+
+// 로그인 제한 상태 확인 함수<br>
+const check_login_blocked = () => {
+
+    const blockedStatus = getCookie("login_blocked");
+    const failedCount = getCookie("login_failed_cnt");
+
+    if (blockedStatus === "true" || parseInt(failedCount) >= 3) {
+        return true;
+    }
+    return false;
+
+};
+
+// 로그인 실패 횟수 초기화 함수 (로그인 성공 시 사용)<br>
+const reset_login_failed = () => {
+
+    setCookie("login_failed_cnt", "", -1); // 쿠키 삭제
+    setCookie("login_blocked", "", -1); // 제한 상태 쿠키 삭제
+
+};
+
+
+#### 📺 로그인 제한 상태 화면 출력
+
+**로그인이 제한된 상태를 화면에 출력하기 위해서 login.js에 init함수를 수정한다.**
+
+function init(){
+    
+    const emailInput = document.getElementById('typeEmailX');
+    const idsave_check = document.getElementById('idSaveCheck');
+    let get_id = getCookie("id");
+
+    if(get_id) {
+        emailInput.value = get_id;
+        idsave_check.checked = true;
+    }
+
+    // 로그인 제한 상태 확인 및 표시
+    if (check_login_blocked()) {
+        const failedCount = getCookie("login_failed_cnt") || 0;
+        
+        // 경고 메시지 표시<br>
+        const warningDiv = document.createElement('div');
+        warningDiv.style.color = 'red';
+        warningDiv.style.fontWeight = 'bold';
+        warningDiv.style.textAlign = 'center';
+        warningDiv.style.marginBottom = '10px';
+        warningDiv.innerHTML = `⚠️ 로그인이 1분간 제한되었습니다<br>실패 횟수: ${failedCount}회`;
+        
+        // 로그인 폼 위에 경고 메시지 삽입
+        const loginForm = document.getElementById('login_form');
+        loginForm.parentNode.insertBefore(warningDiv, loginForm);
+        
+        // 입력 필드 비활성화
+        document.getElementById('typeEmailX').disabled = true;
+        document.getElementById('typePasswordX').disabled = true;
+        document.getElementById('login_btn').disabled = true;
+    } else {
+        // 현재 실패 횟수 표시 (있는 경우)
+        const failedCount = getCookie("login_failed_cnt");
+        if (failedCount && parseInt(failedCount) > 0) {
+            const infoDiv = document.createElement('div');
+            infoDiv.style.color = 'orange';
+            infoDiv.style.textAlign = 'center';
+            infoDiv.style.marginBottom = '10px';
+            infoDiv.innerHTML = `⚠️ 로그인 실패 횟수: ${failedCount}회 (3회 도달 시 제한)`;
+            
+            const loginForm = document.getElementById('login_form');
+            loginForm.parentNode.insertBefore(infoDiv, loginForm);
+        }
+    }
+
+session_check();
+
+}
+
+
+#### 🔧 중요한 구현 포인트
+
+**쿠키 만료 시간 설정**
+- `setCookie("login_failed_cnt", newCount.toString(), 1)` - 1분 동안만 유지
+- 시간이 지나면 자동으로 제한이 해제되는 보안 메커니즘
+
+**로그인 실패 조건 설정**
+- 여태까지 만들었던 로그인이 되기 위한 조건문(if문) 안에 login_failed()를 추가해줘야 한다.
+- EX) if (passwordValue.length > 15) {
+
+         alert('비밀번호는 15글자 이하로 입력해야 합니다.');
+         login_failed(); // 실패 카운트 증가
+        return false;
+      
+      }
+
+**동적 UI 생성**
+- `document.createElement('div')`로 경고 메시지를 동적으로 생성
+- `insertBefore()`로 기존 폼 위에 메시지 삽입
+
+**입력 필드 비활성화**
+- `disabled = true`로 로그인 제한 시 모든 입력을 차단
+- 사용자가 우회할 수 없도록 완전 차단
+
+**보안 쿠키 설정 예시**
+document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/" + ";SameSite=None; Secure";
+
+
+
+---
