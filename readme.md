@@ -680,9 +680,11 @@ const check = () => {
 
 // 분 단위 쿠키 설정 함수(원래 login.js에 있는 setCookie는 일(day)단위로 쿠키를 저장하기 때문에 분 단위로 저장하기 위해 따로 쿠키를 저장하는 함수를 만들었다.)<br>
 const setCookieMinutes = (name, value, expireMinutes) => {
+
     const date = new Date();
     date.setTime(date.getTime() + (expireMinutes * 60 * 1000));
     document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "; path=/";
+
 };
 
 // 로그인 실패 횟수 관리 함수<br>
