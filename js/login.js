@@ -1,5 +1,6 @@
 import { session_set, session_get, session_check } from './session.js';
-import { encrypt_text, decrypt_text } from './crypto.js';
+// import { encrypt_text, decrypt_text } from './crypto.js';
+// import { decrypt_text_web } from './crypto2.js';
 import { generateJWT, checkAuth } from './jwt_token.js';
 
 function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
@@ -53,16 +54,6 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
 document.addEventListener('DOMContentLoaded', () => {
 init();
 });
-
-
-function init_logined(){
-   if(sessionStorage){
-      decrypt_text(); // 복호화 함수
-   }
-   else{
-      alert("세션 스토리지 지원 x");
-   }
-}
 
 
 const check_xss = (input) => {
@@ -156,7 +147,7 @@ const login_count = () => {
     alert("로그인 횟수: " + newCount + "회");
 };
 
-const check_input = () => {
+const check_input = async () => {
 
     if (check_login_blocked()) {
         const failedCount = getCookie("login_failed_cnt") || 0;
@@ -333,7 +324,7 @@ const check_input = () => {
     console.log('이메일:', emailValue);
     console.log('비밀번호:', passwordValue);
     
-    session_set(); // 세션 생성
+    await session_set(); // 세션 생성
     localStorage.setItem('jwt_token', jwtToken);
     loginForm.submit();
 };

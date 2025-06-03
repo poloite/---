@@ -10,8 +10,9 @@
     }
 }*/
 import { encrypt_text, decrypt_text } from './crypto.js';
+import { encrypt_text_web, decrypt_text_web } from './crypto2.js';  // 새로운 Web Crypto
 
-export function session_set(){ //세션 저장(객체)
+export async function session_set(){ //세션 저장(객체)
     let id = document.querySelector("#typeEmailX");
     let password = document.querySelector("#typePasswordX");
     let random = new Date(); // 랜덤 타임스탬프
@@ -21,19 +22,20 @@ export function session_set(){ //세션 저장(객체)
     }
     if (sessionStorage) {
         const objString = JSON.stringify(obj); // 객체 -> JSON 문자열 변환
-        let en_text = encrypt_text(objString); // 암호화 11주차 문제 풀 시 await 추가가
+        let en_text = await encrypt_text(objString); // 암호화 11주차 문제 풀 시 await 추가
+        const encryptedText = await encrypt_text_web(objString);
         sessionStorage.setItem("Session_Storage_id", id.value);
         sessionStorage.setItem("Session_Storage_object", objString);
         sessionStorage.setItem("Session_Storage_pass", en_text);
+        sessionStorage.setItem("Session_Storage_pass2",encryptedText ); // 새로운 Web Crypto 
     } else {
         alert("세션 스토리지 지원 x");
     }
 }
 
-export function session_set2(obj){ //세션 저장(객체)
+export async function session_set2(obj){ //세션 저장(객체)
     if (sessionStorage) {
         const objString = JSON.stringify(obj); // 객체 -> JSON 문자열 변환
-        //let en_text = encrypt_text(objString); // 암호화 11주차 문제 풀 시 await 추가가
         sessionStorage.setItem("Session_Storage_join", objString);
     } else {
         alert("세션 스토리지 지원 x");
@@ -49,6 +51,15 @@ export function session_get() { //세션 읽기
         alert("세션 스토리지 지원 x");
     }
 }
+
+export async function session_get_web() {
+    if (sessionStorage) {
+        return sessionStorage.getItem("Session_Storage_pass2");
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+}
+
 
 export function session_check() { 
     // 현재 페이지가 로그아웃 페이지인 경우 세션 체크 생략

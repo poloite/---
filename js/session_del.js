@@ -33,21 +33,25 @@ const logout_count = () => {
 
 function session_del() {//세션 삭제
         if (sessionStorage) {
-            sessionStorage.removeItem("Session_Storage_id");
-            sessionStorage.removeItem("Session_Storage_pass");
-            alert('로그아웃 버튼 클릭 확인 : 세션 스토리지를 삭제합니다.');
+            // 모든 세션 스토리지 데이터를 한 번에 삭제
+            sessionStorage.clear();
+             // JWT 토큰 삭제 추가
+            localStorage.removeItem('jwt_token');
+            
+            console.log('세션 스토리지와 JWT 토큰이 삭제되었습니다.');
+            alert('로그아웃 버튼 클릭 확인 : 세션 스토리지와 JWT 토큰을 삭제합니다.');
         } 
         else {
             alert("세션 스토리지 지원 x");
         }
-    }
+}
 
 
 const check = () => {
     const logoutForm = document.getElementById('logout_form');
     const logoutBtn = document.getElementById('logout_btn');
         logout_count();
-        session_del(); // 세션 삭제
+        session_del(); // 세션 삭제 + jwt 토큰 삭제
       
     logoutForm.submit();
 }    

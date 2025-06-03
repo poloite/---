@@ -815,3 +815,258 @@ document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTC
 
 
 ---
+
+## 🎯 11주차 - Web Crypto API 및 JWT 토큰 관리
+
+### 💡 지난주 내용 살펴보기
+
+#### 🔍 DOM 조작 및 스토리지
+
+| 질문 | 답변 |
+|------|------|
+| **getElementById를 대체할 수 있는 이 함수는?** | querySelector 함수 |
+| **세션 스토리지 객체의 이름은?** | sessionStorage |
+| **세션 스토리지에 저장된 모든 정보를 삭제하는 함수는?** | clear() |
+| **세션 스토리지의 자료구조의 구성은?** | 키-값 쌍 Key-Value |
+
+#### 🔐 쿠키 vs 세션 스토리지
+
+**기존 쿠키와 세션의 저장 유지하는 방법에 차이점**
+- **쿠키**: 유효기간이 정해져 있어 유효기간이 지나면 삭제되고, 쿠키는 모든 탭에 공유된다
+- **세션**: 윈도우나 브라우저 탭을 닫으면 삭제되고, 세션은 하나의 탭에만 공유된다(범위제한)
+
+**세션 스토리지는 쿠키에 비해 안전한가?**
+- **쿠키**: 로컬에 저장하기 때문에 해킹 위험이 존재하고 장시간 신뢰할 수 없다
+- **세션**: 서버에서 처리 및 저장하기 때문에 비교적 안전하다
+
+### 🛠️ 11주차 응용 문제
+
+#### 🔒 세션 암호화 관련 문제
+
+**구현 조건**
+1. 웹 브라우저 내장 라이브러리
+2. Web Crypto API 활용하기
+3. 참고: HTTPS 전용이지만 수행 가능
+
+#### 🔐 AES-256-GCM 대칭 암호 알고리즘 구현
+
+**crypto2.js를 생성하고 암/복호화 함수를 정의한다**
+
+import { session_set, session_get, session_get_web ,session_check } from './session.js'; //session_get_web 가져오기
+
+// Web Crypto API로 암호화하는 함수<br>
+export async function encrypt_text_web(password) {
+
+    try {
+
+        const key = "web_crypto_key"; // 클라이언트 키
+        const rk = key.padEnd(32, " "); // AES256은 key 길이가 32
+
+        // 키를 CryptoKey 객체로 변환
+        const cryptoKey = await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(rk),
+            { name: "AES-GCM" },  //AES-256-GCM 대칭 암호 알고리즘 구현
+            false,
+            ["encrypt"]
+        );
+        
+        // 랜덤 IV 생성 (12바이트)
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        
+        // 암호화 수행
+        const encrypted = await crypto.subtle.encrypt(
+            {
+                name: "AES-GCM",  //AES-256-GCM 대칭 암호 알고리즘 구현
+                iv: iv
+            },
+            cryptoKey,
+            new TextEncoder().encode(password)
+        );
+        
+        // IV + 암호화된 데이터를 Base64로 인코딩
+        const combined = new Uint8Array(iv.length + encrypted.byteLength);
+        combined.set(iv);
+        combined.set(new Uint8Array(encrypted), iv.length);
+        
+        return btoa(String.fromCharCode.apply(null, combined));
+    } catch (error) {
+        console.error('Web Crypto 암호화 오류:', error);
+        return null;
+     }
+
+}
+
+// Web Crypto API로 복호화하는 함수<br>
+export async function decrypt_text_web() {
+
+    try {
+            const key = "web_crypto_key"; // 서버의 키
+            const rk = key.padEnd(32, " "); // AES256은 key 길이가 32
+
+            // 세션에서 암호화된 데이터 가져오기
+            const encryptedData = await session_get_web();
+            if (!encryptedData) {
+                console.log("암호화된 데이터가 없습니다.");
+                return;
+            }
+            
+            // Base64 디코딩
+            const combined = new Uint8Array(
+                atob(encryptedData).split('').map(char => char.charCodeAt(0))
+            );
+            
+            // IV와 암호화된 데이터 분리
+            const iv = combined.slice(0, 12);
+            const encrypted = combined.slice(12);
+            
+            // 키를 CryptoKey 객체로 변환
+            const cryptoKey = await crypto.subtle.importKey(
+                "raw",
+                new TextEncoder().encode(rk),
+                { name: "AES-GCM" },  //AES-256-GCM 대칭 암호 알고리즘 구현
+                false,
+                ["decrypt"]
+            );
+            
+            // 복호화 수행
+            const decrypted = await crypto.subtle.decrypt(
+                {
+                    name: "AES-GCM",  //AES-256-GCM 대칭 암호 알고리즘 구현
+                    iv: iv
+                },
+                cryptoKey,
+                encrypted
+            );
+            
+            const result = new TextDecoder().decode(decrypted);
+            console.log("Web Crypto 복호화 결과:", result);
+            return result;
+        } catch (error) {
+            console.error('Web Crypto 복호화 오류:', error);
+            return null;
+         }
+
+}
+
+
+#### 🔗 로그인, 로그인 후 페이지에 연결
+
+**session.js에서 수정한 코드**
+
+import { encrypt_text_web, decrypt_text_web } from './crypto2.js'; // 새로운 Web Crypto, 맨 위에 추가
+
+//session_set 함수 수정
+export async function session_set(){ //세션 저장(객체), async추가
+
+    let id = document.querySelector("#typeEmailX");
+    let password = document.querySelector("#typePasswordX");
+    let random = new Date(); // 랜덤 타임스탬프
+    const obj = { // 객체 선언
+        id : id.value,
+        otp : random
+    }
+    if (sessionStorage) {
+        const objString = JSON.stringify(obj); // 객체 -> JSON 문자열 변환
+        let en_text = await encrypt_text(objString); // 암호화 11주차 문제 풀 시 await 추가
+        const encryptedText = await encrypt_text_web(objString); //11주차 문제를 통해 추가한 내용
+        sessionStorage.setItem("Session_Storage_id", id.value);
+        sessionStorage.setItem("Session_Storage_object", objString);
+        sessionStorage.setItem("Session_Storage_pass", en_text);
+        sessionStorage.setItem("Session_Storage_pass2",encryptedText ); // 새로운 Web Crypto, 세션에 Session_Storage_pass2로 저장
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+
+}
+
+//기존 session_get() 함수 아래에다가 추가
+export async function session_get_web() {
+
+    if (sessionStorage) {
+        return sessionStorage.getItem("Session_Storage_pass2");
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+
+}
+
+
+**login.js 수정사항**
+- session_set 함수에 새로운 crypto를 추가하였기 때문에 login.js에서는 그대로 session_set함수만 불러오면 된다
+- 추가한 점이라고 하면 login.js에 check_input 함수에서 `session_set()` 앞에다가 `await`을 붙인다
+
+**로그인 후 페이지는 login2.js와 연동이 되기 때문에 첫 번째 줄에 아래의 코드를 추가하였다**
+
+**login2.js 수정사항**
+
+**첫 번째 줄에 아래의 코드를 추가한다:**
+
+import { decrypt_text_web } from './crypto2.js';
+
+
+**그리고 login2.js에 init_logined()함수를 수정한다:**
+
+function init_logined(){
+
+    if(sessionStorage){
+        decrypt_text(); // 복호화 함수
+        decrypt_text_web();//pass2 복호화 함수, 수정한 부분
+    }
+    else{
+        alert("세션 스토리지 지원 x");
+    }
+
+}
+
+
+**주의할 점**: 관련된 html파일에서 스크립트 태그 타입이 module로 변경이 되었는지 확인한다.
+
+### 🛠️ 11주차 연습문제
+
+#### 🚪 로그아웃 처리
+
+**로그아웃 기능 추가**
+- JWT 토큰(jwt_token)을 삭제하는 함수 구현하기
+- 기존에는 로그아웃과 동시에 쿠키, 세션을 삭제
+- 로그인 이후 로컬스토리지의 토큰을 삭제한다
+- 참고: `.removeItem` 메소드를 활용한다
+
+**session_del.js 수정**
+
+**로그아웃 기능을 하는 파일은 session_del.js이다. 따라서 세션과 JWT토큰을 한번에 지울 수 있도록 session_del()함수를 수정한다:**
+
+function session_del() {
+    if (sessionStorage) {
+        // 모든 세션 스토리지 데이터를 한 번에 삭제
+        sessionStorage.clear();
+        // JWT 토큰 삭제 추가
+        localStorage.removeItem('jwt_token'); //추가된 부분, 조건에 맞는 .removeItem 메소드를 활용
+
+        console.log('세션 스토리지와 JWT 토큰이 삭제되었습니다.');
+        alert('로그아웃 버튼 클릭 확인 : 세션 스토리지와 JWT 토큰을 삭제합니다.');
+    } 
+    else {
+        alert("세션 스토리지 지원 x");
+    }
+
+}
+
+
+#### 🔧응용문제, 연습문제 중요한 구현 포인트
+
+**Web Crypto API 특징**
+- AES-256-GCM 알고리즘으로 기존 CBC보다 강화된 보안을 제공한다
+- 랜덤 IV를 매번 생성하여 패턴 분석을 방지한다
+- HTTPS 환경에서만 작동하므로 보안이 강화된다
+
+**비동기 처리**
+- Web Crypto API는 모든 함수가 Promise를 반환하므로 `async/await` 사용이 필수다
+- 기존 동기 함수들과 혼용 시 적절한 비동기 처리가 중요하다
+
+**완전한 로그아웃**
+- 세션 스토리지 삭제 (sessionStorage.clear())
+- JWT 토큰 삭제 (localStorage.removeItem())
+- 쿠키 삭제 (기존 기능 유지)
+
+---
