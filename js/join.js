@@ -1,4 +1,5 @@
 import { session_set2 } from './session.js';
+import { encrypt_text } from './crypto.js';
 
 function join(){ // 회원가입 기능
     
@@ -17,6 +18,8 @@ function join(){ // 회원가입 기능
     }
     else{
         const newSignUp = new SignUp(name.value, email.value, password.value, re_password.value); // 회원가입 정보 객체 생성
+        const encrypted = encrypt_text(JSON.stringify(newSignUp.getUserInfo())); // [추가] 암호화해서 세션에 저장
+        sessionStorage.setItem('encryptedSignupData', encrypted); // [추가] 암호화해서 세션에 저장
         session_set2(newSignUp); // 세션 저장 및 객체 전달
         form.submit(); // 폼 실행
     }

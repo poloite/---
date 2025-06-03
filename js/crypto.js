@@ -27,9 +27,13 @@ export function encrypt_text(password){
 }
 
 export function decrypt_text(){
-    const k = "key"; // 서버의 키
-    const rk = k.padEnd(32, " "); // AES256은 key 길이가 32
-    const eb = session_get();
-    const b = decodeByAES256(rk, eb); // 실제 복호화
-    console.log(b);
+    const k = "key";
+    const rk = k.padEnd(32, " ");
+    const eb = sessionKey ? sessionStorage.getItem(sessionKey) : session_get();
+    if (!eb) {
+        console.log("암호화된 회원가입 데이터 없음");
+        return null;
+    }
+    const b = decodeByAES256(rk, eb);
+    return b; // 콘솔 출력 대신 반환
 }

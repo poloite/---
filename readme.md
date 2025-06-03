@@ -1037,6 +1037,7 @@ function init_logined(){
 **로그아웃 기능을 하는 파일은 session_del.js이다. 따라서 세션과 JWT토큰을 한번에 지울 수 있도록 session_del()함수를 수정한다:**
 
 function session_del() {
+
     if (sessionStorage) {
         // 모든 세션 스토리지 데이터를 한 번에 삭제
         sessionStorage.clear();
@@ -1068,5 +1069,148 @@ function session_del() {
 - 세션 스토리지 삭제 (sessionStorage.clear())
 - JWT 토큰 삭제 (localStorage.removeItem())
 - 쿠키 삭제 (기존 기능 유지)
+
+---
+
+## 🎯 12주차 - 회원가입 정보 암호화 및 복호화
+
+### 🛠️ 12주차 연습문제
+
+#### 🔐 회원가입 후 암호화된 객체 저장하기
+
+**구현 조건**
+1. 회원가입 후 암호화된 객체 저장하기
+2. 세션에 암호화하여 저장
+
+**join.js를 수정하고 암호화 저장 기능을 추가한다**
+
+import { encrypt_text } from './crypto.js'; // 맨 위에 추가
+
+function join(){ // 회원가입 기능
+
+    let form = document.querySelector("#join_form"); // 로그인 폼 식별자
+    let name = document.querySelector("#form3Example1c");
+    let email = document.querySelector("#form3Example3c");
+    let password = document.querySelector("#form3Example4c");
+    let re_password = document.querySelector("#form3Example4cd");
+    let agree = document.querySelector("#form2Example3c");
+
+    form.action = "../Web_main 20220987/index.html"; // 로그인 성공 시 이동
+    form.method = "get"; // 전송 방식
+
+    if(name.value.length === 0 || email.value.length === 0 || password.value.length === 0 || re_password.length === 0){
+        alert("회원가입 폼에 모든 정보를 입력해주세요.");
+    }
+    else{
+        const newSignUp = new SignUp(name.value, email.value, password.value, re_password.value); // 회원가입 정보 객체 생성
+        
+        [추가] 회원가입 객체를 JSON 문자열로 변환 암호화 함수에 전달하기 위한 직렬화 과정, crypto.js의 암호화 함수 호출
+        const encrypted = encrypt_text(JSON.stringify(newSignUp.getUserInfo()));
+        [추가] 암호화된 회원가입 정보를 세션 스토리지에 저장, 키: 'encryptedSignupData', 값: 암호화된 문자열
+        sessionStorage.setItem('encryptedSignupData', encrypted);
+        
+        session_set2(newSignUp); // 세션 저장 및 객체 전달
+        form.submit(); // 폼 실행
+    }
+
+}
+
+
+#### 🔓 로그인 후 복호화된 객체 내용 출력하기
+
+**구현 조건**
+1. 암호화된 회원가입 정보를 복호화
+2. 콘솔에 출력
+
+**로그인 후 복호화된 객체 내용을 출력하기 위해서 crypto.js와 로그인 후 페이지이기 때문에 index_login.html과 연결된 login2.js를 수정하였다.**
+
+**crypto.js에서 복호화 함수를 수정한다**
+
+**crypto.js 수정사항**
+
+// 기존 함수에 매개변수만 추가 - 기본값으로 기존 동작 유지<br>
+export function decrypt_text(sessionKey = null){
+    
+    const k = "key";
+    const rk = k.padEnd(32, " ");
+
+
+    // 매개변수가 있으면 해당 세션키 사용, 없으면 기존 방식 유지
+    const eb = sessionKey ? sessionStorage.getItem(sessionKey) : session_get();
+
+    if (!eb) {
+        console.log("암호화된 데이터 없음");
+        return null;
+    }
+    const b = decodeByAES256(rk, eb);
+    return b;
+
+}
+
+**login2.js 수정사항**
+
+**login2.js에 init_logined()함수를 수정한다:**
+
+function init_logined(){
+    if(sessionStorage){
+        // 기존 로그인 데이터 복호화 (그대로 유지)
+        const decrypted = decrypt_text();
+        if (decrypted) {
+            try {
+                const userInfo = JSON.parse(decrypted);
+                console.log("복호화된 로그인 정보:", userInfo);
+            } catch (e) {
+                console.log("로그인 데이터 파싱 오류:", e);
+            }
+        }
+
+        // 회원가입 데이터 복호화 (새로 추가)
+        const signupDecrypted = decrypt_text('encryptedSignupData'); //회원가입 시 암호화 된 데이터를 복호화하는 역활을 한다.
+        if (signupDecrypted) {
+            try {
+                const signupInfo = JSON.parse(signupDecrypted);
+                console.log("복호화된 회원가입 정보:", signupInfo);  //console.log로 복호화된 회원가입 정보를 콘솔에 출력
+            } catch (e) {
+                console.log("회원가입 데이터 파싱 오류:", e);
+            }
+        } else {
+            console.log("세션에 회원가입 데이터가 없어 복호화하지 않음");
+        }
+
+        decrypt_text_web();
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+}
+
+
+#### 🔒 세션에 회원가입 세션이 없다면 복호화 x, 출력하지 않음
+
+**조건부 복호화 처리**
+- 세션에 회원가입 세션이 없다면 복호화 x, 출력하지 않음
+- if 조건문을 활용하여 데이터 존재 여부를 확인한다
+
+**위의 login2.js의 init_logined() 함수를 보면 if (signupDecrypted) 조건문을 통해 회원가입 데이터가 없으면 아래의 코드가 실행되도록 하였다:**
+
+// 데이터가 없을 때 메시지 출력
+console.log("세션에 회원가입 데이터가 없어 복호화하지 않음");
+
+
+#### 🔧연습문제 중요한 구현 포인트
+
+**회원가입 정보 암호화**
+- JSON.stringify()로 객체를 문자열로 직렬화한다
+- encrypt_text() 함수로 AES-256-CBC 방식 암호화를 수행한다
+- sessionStorage.setItem()으로 암호화된 데이터를 저장한다
+
+**조건부 복호화**
+- 매개변수를 활용하여 기존 함수의 호환성을 유지한다
+- 세션 데이터 존재 여부를 확인하여 안전한 복호화를 수행한다
+- try-catch 문으로 JSON 파싱 오류를 처리한다
+
+**보안 강화**
+- 회원가입 정보가 평문이 아닌 암호화된 형태로 저장된다
+- 로그인 후에만 복호화가 수행되어 접근을 제한한다
+- 데이터 부재 시 복호화를 시도하지 않아 시스템 안정성을 확보한다
 
 ---
