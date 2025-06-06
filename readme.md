@@ -1,3 +1,5 @@
+**Readme.md를 정리할 때는 AI의 힘을 많이 빌렸지만 "자습" 폴더에서 "자바웹 자습"을 보시면 AI의 힘을 빌리지 않은 내용을 볼 수 있습니다.**
+
 # 📚 자바웹 학습 정리
 
 
@@ -1215,71 +1217,268 @@ console.log("세션에 회원가입 데이터가 없어 복호화하지 않음")
 
 ---
 
-<div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                            <div class="card-body">
-                                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> 게임 수학능력
-                                </p>
-                                <p class="mb-1" style="font-size: .77rem;">벡터</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="80"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">행렬</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="72"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">선형대수학</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="89"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">선형변환</p>
-                                <div class="progress rounded" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="55"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p class="mt-4 mb-1" style="font-size: .77rem;">기하학</p>
-                                <div class="progress rounded mb-2" style="height: 5px;">
-                                <div class="progress-bar" role="progressbar" style="width: 23%" aria-valuenow="66"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> 게임 엔진 숙련도
-                                    </p>
-                                    <p class="mb-1" style="font-size: .77rem;">유니티</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">언리얼 엔진</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="72"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Native</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="89"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Godot</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="55"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Construct</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="66"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
+
+## 🎯 13주차 - 웹 오픈 API
+
+### 💡 지난주 내용 살펴보기
+
+#### 🔍 JS 모듈 시스템 및 OOP
+
+| 질문 | 답변 |
+|------|------|
+| **JS 모듈 시스템의 함수에 대한 접근 제한의 특징은?** | 외부에서 사용하려면 무조건 함수 앞에 export를 붙여서 공개해야 하고, 공개된 함수를 접근하려면 import를 통해 접근한다 |
+| **JS의 OOP 기법의 생성자의 역할은?** | 객체 생성 시에 자동 초기화를 담당하고, this 키워드를 사용하여 현재 생성되는 객체의 속성을 설정한다 |
+| **모듈 시스템에서 HTML코드 내 직접 함수 호출 방법은?** | 이벤트 리스너를 통해 직접 함수를 호출하는 방법이 있다 |
+| **복잡한 문자 조합을 위한 조합식을 무엇이라 하는가?** | 정규표현식이라고 한다 |
+
+#### 🔧 DOM 및 이벤트 처리
+
+| 질문 | 답변 |
+|------|------|
+| **리스너에 등록된 DOMContentLoaded의 호출 시점은?** | DOM 요소(DOM tree)들이 완성된 후 실행된다 |
+| **특정 객체로 마우스 포인터를 자동으로 이동하는 함수는?** | focus() 함수 |
+
+### 🛠️ 13주차 응용 문제 - 1
+
+#### 🖼️ 개인 사진, 기술 스택 - 원하는 사진으로 수정, 개인 스킬로 수정
+
+**프로필 사진 수정**
+
+**profile.html에 프로필 사진이 나오는 img태그를 아래와 같이 수정하였다:**
+
+`<img src="../Web_main 20220987/image/profile.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"> `
+
+**기술 스택 수정**
+
+- 기술 스택은 아래와 같이 수정하였다.
+
+- 게임 수학능력: 벡터, 행렬, 선형대수학, 선형 변환, 기하학
+
+- 게임 엔진 숙련도: 유니티, 언리얼 엔진, Native, Godot, Construct
+
+- 숙련도도 퍼센트는 본인의 생각으로 알맞은 숙련도 값을 넣었다.
+
+#### 🔒 프로필 페이지 접근 제한하기
+
+**구현 조건**
+
+- 세션에 로그인된 정보 검사
+
+- 세션이 있으면 메인 페이지 이동
+
+- 원래는 session.js에서 session_check 함수를 이용해 세션을 검사해서 접근을 막으려고 했지만 다른 html에도 그 기능이 연동되어 꼬이는 경우가 발생해서 profile_access.   js라는 자바스크립트를 따로 만들어서 진행하였다.
+
+**profile_access.js 생성**
+
+    function checkProfileAccess() {
+
+        // 세션 스토리지 지원 여부 확인
+        if (!sessionStorage) { // 브라우저 세션 스토리지 지원 확인
+            alert("로그인이 필요합니다.");
+            window.location.href = "../login/login.html"; // 로그인 페이지로 돌아가기
+            return false;
+        }
+
+        // 로그인 세션 정보 확인
+        const sessionId = sessionStorage.getItem("Session_Storage_id"); // 로그인 ID 가져오기
+
+        if (!sessionId) { // 로그인 정보가 없는 경우
+            alert("로그인이 필요합니다.");
+            window.location.href = "../login/login.html"; // 로그인 페이지로 돌아가기
+            return false;
+        }
+
+        return true; // 접근 허용
+
+    }
+
+    // 페이지 로드 즉시 실행
+    document.addEventListener('DOMContentLoaded', function() { // DOM 로드 완료 시 실행
+        checkProfileAccess(); // 프로필 접근 권한 검사 함수 호출
+    });
+
+- 그 다음에 profile.html에 연동하여 마무리를 했다.
+
+### 🛠️ 13주차 응용 문제 - 2
+
+#### 🗺️ 카카오 맵 - 좌표로 주소 출력하기
+
+**구현 조건**
+
+- 자바스크립트 수정하기
+
+- HTML코드 수정하기
+
+- CSS 스타일 추가하기
+
+**1. 자바스크립트 수정하기**
+
+- 아래의 코드를 제외한 가이드에 있는 코드를 그대로 복사하였다.
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+
+    mapOption = {
+
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    
+    };  
+
+    // 지도를 생성합니다<br>  
+    var map = new kakao.maps.Map(mapContainer, mapOption)
+
+**2. HTML코드 수정하기**
+
+- 아래의 코드를 `<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>` 아래에 추가하였다.
+
+    `<div class="hAddr">`
+
+        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span id="centerAddr"></span>
+    
+    `</div>`
+
+**3. CSS 스타일 추가하기(profile.css 수정하기)**
+
+- 아래의 코드를 profile.css 마지막에 추가하였다. (원래는 왼쪽 위에 출력되게 되어있는데 오른쪽 아래에 출력되게 수정하였다.)
+
+
+.map_wrap {position:relative;width:100%;height:350px;}<br>
+.title {font-weight:bold;display:block;}<br>
+.hAddr {position:absolute;right:10px;bottom:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}<br>
+#centerAddr {display:block;margin-top:2px;font-weight: normal;}<br>
+.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+
+#### 🔧응용문제 중요한 구현 포인트
+
+**개인화 요소**
+
+- 프로필 이미지와 기술 스택을 개인 특성에 맞게 수정한다.
+
+- 게임 개발 관련 기술 스택으로 전문성을 표현한다.
+
+**프로필 페이지 접근 제한**
+
+- 별도의 JavaScript 파일로 분리하여 다른 페이지와의 충돌을 방지한다.
+
+- sessionStorage를 활용하여 로그인 상태를 검증한다.
+
+- DOMContentLoaded 이벤트로 페이지 로드 즉시 접근 권한을 검사한다.
+
+**카카오맵 연동**
+
+- 카카오맵 API를 활용하여 지도 기능을 구현한다.
+
+- 좌표를 통해 실시간으로 주소 정보를 출력한다.
+
+- CSS를 통해 주소 정보 표시 위치를 사용자 정의한다.
+
+
+---
+
+## 🔧 추가 구현 포인트 - 회원가입 정보 기반 로그인 검증
+
+### 💡 구현 목표
+- 회원가입한 정보와 일치하는 경우에만 로그인 허용
+- 미가입 사용자 또는 잘못된 정보 입력 시 적절한 피드백 제공
+- 로그인 실패 횟수 관리 시스템과 연동
+
+### 🛠️ 구현 내용
+
+#### 🔐 회원가입 정보 검증 함수 추가
+
+**login.js의 check_input 함수 위에 다음 함수(validateLoginCredentials)를 추가한다:**
+
+    function validateLoginCredentials(inputEmail, inputPassword) {
+        
+        // 세션에서 회원가입 정보 가져오기
+        const signupData = sessionStorage.getItem("Session_Storage_join");
+
+        
+        if (!signupData) {
+            alert("회원가입 정보가 없습니다. 먼저 회원가입을 해주세요.");
+            return false;
+        }
+
+        try {
+            const signupInfo = JSON.parse(signupData);
+            
+            // 이메일과 비밀번호 비교
+            if (signupInfo._email === inputEmail && signupInfo._password === inputPassword) {
+                console.log("로그인 성공: 회원가입 정보와 일치");
+                alert("로그인 성공")
+                return true;
+            } else {
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+        } catch (error) {
+            console.error("회원가입 정보 파싱 오류:", error);
+            alert("회원가입 정보를 확인할 수 없습니다.");
+            return false;
+        }
+    }
+
+
+
+#### 🔗 check_input 함수에 검증 로직 연동
+
+**login.js의 check_input 함수 안에 다음 코드를 추가한다:**
+
+    // 회원가입 정보와 비교 검증 추가
+    if (!validateLoginCredentials(emailValue, passwordValue)) {
+
+        login_failed(); // 로그인 실패 횟수 증가
+        return false;
+    
+    }
+
+
+
+### 🎯 동작 시나리오
+
+#### ✅ 회원가입된 사용자의 경우
+1. **올바른 이메일과 비밀번호 입력**
+2. **세션에서 회원가입 정보 확인**
+3. **입력 정보와 저장된 정보 비교**
+4. **일치 시**: "로그인 성공" 메시지 출력 후 로그인 진행
+5. **로그인 실패 횟수 초기화**
+
+#### ❌ 미가입 사용자의 경우
+1. **임의의 이메일과 비밀번호 입력**
+2. **세션에 회원가입 정보 없음 확인**
+3. **"회원가입 정보가 없습니다. 먼저 회원가입을 해주세요." 메시지 출력**
+4. **로그인 실패 횟수 증가**
+5. **로그인 진행 중단**
+
+#### ⚠️ 잘못된 정보 입력 시
+1. **회원가입은 했지만 틀린 이메일 또는 비밀번호 입력**
+2. **세션의 회원가입 정보와 비교**
+3. **불일치 시**: "아이디 또는 비밀번호가 일치하지 않습니다." 메시지 출력**
+4. **로그인 실패 횟수 증가**
+5. **로그인 진행 중단**
+
+### 🔧 핵심 구현 포인트
+
+**세션 기반 인증**
+- sessionStorage에 저장된 회원가입 정보를 활용한다
+- JSON.parse()를 통해 저장된 객체 데이터를 복원한다
+- 클라이언트 사이드에서 즉시 검증이 가능하다
+
+**실패 횟수 연동**
+- 기존 login_failed() 함수와 연동하여 일관된 실패 관리를 수행한다
+- 3회 실패 시 1분간 로그인 제한 기능과 자동 연계된다
+- 성공 시 reset_login_failed()로 실패 횟수를 초기화한다
+
+**사용자 경험 개선**
+- 명확한 피드백 메시지로 사용자가 상황을 쉽게 파악할 수 있다
+- 회원가입 유도를 통해 서비스 가입률을 향상시킨다
+- 보안성과 사용성을 동시에 확보한다
+
+**에러 처리**
+- try-catch 구문으로 JSON 파싱 오류를 안전하게 처리한다
+- 예외 상황에 대한 적절한 사용자 안내를 제공한다
+- 시스템 안정성을 보장한다
+
+---
+
+

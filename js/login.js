@@ -147,6 +147,34 @@ const login_count = () => {
     alert("로그인 횟수: " + newCount + "회");
 };
 
+function validateLoginCredentials(inputEmail, inputPassword) {
+    // 세션에서 회원가입 정보 가져오기
+    const signupData = sessionStorage.getItem("Session_Storage_join");
+    
+    if (!signupData) {
+        alert("회원가입 정보가 없습니다. 먼저 회원가입을 해주세요.");
+        return false;
+    }
+    
+    try {
+        const signupInfo = JSON.parse(signupData);
+        
+        // 이메일과 비밀번호 비교
+        if (signupInfo._email === inputEmail && signupInfo._password === inputPassword) {
+            console.log("로그인 성공: 회원가입 정보와 일치");
+            alert("로그인 성공")
+            return true;
+        } else {
+            alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+    } catch (error) {
+        console.error("회원가입 정보 파싱 오류:", error);
+        alert("회원가입 정보를 확인할 수 없습니다.");
+        return false;
+    }
+}
+
 const check_input = async () => {
 
     if (check_login_blocked()) {
@@ -294,6 +322,12 @@ const check_input = async () => {
          login_failed(); // 실패 카운트 증가
          return false;
       }
+
+        // 회원가입 정보와 비교 검증 추가
+     if (!validateLoginCredentials(emailValue, passwordValue)) {
+         login_failed();
+         return false;
+     }
 
       if (!sanitizedEmail) {
          // Sanitize된 비밀번호 사용
