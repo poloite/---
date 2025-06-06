@@ -974,3 +974,48 @@ A)로그인 후 복호화된 객체 내용을 출력하기 위해서 crypto.js�
 3) 세션에 회원가입 세션이 없다면 복호화 x, 출력하지 않음
 A)위의 login2.js의 init_logined() 함수를 보면 if (signupDecrypted) 조건문을 통해 회원가입 데이터가 없으면 아래의 코드가 실행되도록 하였다.
   console.log("세션에 회원가입 데이터가 없어 복호화하지 않음");
+
+
+
+
+13주차 
+
+지난주 내용 살펴보기
+
+JS 모듈 시스템의 함수에 대한 접근 제한의 특징은?
+A) 외부에서 사용하려면 무조건 함수 앞에 export를 붙여서 공개를 해야한다.
+   그리고 공개된 함수를 접근하려면 import를 통해 접근한다.
+
+JS의 OOP 기법의 생성자의 역할은?
+A) 객체 생성 시에 자동 초기화 담당을 한다.
+   this 키워드를 사용하여 현재 생성되는 객체의 속성을 설정한다.
+   객체 생성과 동시에 실행
+
+모듈 시스템에서 HTML코드 내 직접 함수 호출 방법은 없는가?
+A)있다. 이벤트 리스너를 통해 직접 함수를 호출하는 방법이 있다.
+  ex)document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      init_logined();
+     });
+
+한글, 영문, 특수문자 등 복잡한 문자 조합을 위한 조합식을 무엇이라 하는가?
+A)정규표현식이라고 한다.
+
+리스너에 등록된 DOMContentLoaded의 호출 시점은?
+A) DOM 요소(DOM tree)들이 완성 된 후 실행된다. 
+
+특정 객체로 마우스 포인터를 자동으로 이동하는 함수는?
+A)focus()함수
+
+
+<13주차 응용 문제>
+
+• 개인 사진, 기술 스택 - 원하는 사진으로 수정, 개인 스킬로 수정
+
+A)profile.html에 프로필 사진이 나오는 <img>태그를 아래와 같이 수정하였다.
+  <img src="../Web_main 20220987/image/profile.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+
+  기술 스택은 아래와 같이 수정하였다.
+  
+
+

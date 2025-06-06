@@ -493,10 +493,10 @@ if (passwordMatches) {
 
 | 질문 | 답변 |
 |------|------|
-| **정규표현식의 문자열을 검사하는 함수는?** | `.test()` 함수 |
+| **정규표현식의 문자열을 검사하는 함수는?** | `match` 함수 |
 | **정규표현식에서 한 개이상을 나타내는 기호표현은?** | `+` |
 | **특수문자를 필터링 해야 하는 이유는?** | 서버 내부 시스템 명령을 악의적으로 수행 가능하기 때문이다. |
-| **DOMPurify 라이브러리의 핵심 검사 함수는?** | `check_xss` 함수 |
+| **DOMPurify 라이브러리의 핵심 검사 함수는?** | `sanitized` 함수 |
 
 #### 🛠️ 쉘 스크립팅
 
@@ -1214,3 +1214,72 @@ console.log("세션에 회원가입 데이터가 없어 복호화하지 않음")
 - 데이터 부재 시 복호화를 시도하지 않아 시스템 안정성을 확보한다
 
 ---
+
+<div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> 게임 수학능력
+                                </p>
+                                <p class="mb-1" style="font-size: .77rem;">벡터</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="80"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">행렬</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="72"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">선형대수학</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="89"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">선형변환</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="55"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">기하학</p>
+                                <div class="progress rounded mb-2" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 23%" aria-valuenow="66"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> 게임 엔진 숙련도
+                                    </p>
+                                    <p class="mb-1" style="font-size: .77rem;">유니티</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="80"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">언리얼 엔진</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="72"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Native</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="89"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Godot</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="55"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Construct</p>
+                                    <div class="progress rounded mb-2" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="66"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>

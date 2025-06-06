@@ -26,14 +26,17 @@ export function encrypt_text(password){
     console.log(eb);
 }
 
-export function decrypt_text(){
+export function decrypt_text(sessionKey = null){ // 매개변수 추가
     const k = "key";
     const rk = k.padEnd(32, " ");
+    
+    // 매개변수가 있으면 해당 세션키 사용, 없으면 기존 방식 유지
     const eb = sessionKey ? sessionStorage.getItem(sessionKey) : session_get();
+    
     if (!eb) {
-        console.log("암호화된 회원가입 데이터 없음");
+        console.log("암호화된 데이터 없음");
         return null;
     }
     const b = decodeByAES256(rk, eb);
-    return b; // 콘솔 출력 대신 반환
+    return b;
 }
